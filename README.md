@@ -32,7 +32,7 @@ UNIFI_DOOR_TOKEN=Wh...
 ```
 
 You will need to invite (via `/invite @DoorBot`) to the specific channel you want it to post to, and populate the `SLACK_CHANNEL_ID` field
-in the .env accordingly.
+in the `.env` accordingly.
 
 On the Unifi side, create a new token with `VIEW` permissions on `User & Group` and `System Log`.  Place that credential in the `.env` file,
 along with the API endpoint for the Unifi service.
