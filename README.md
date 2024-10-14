@@ -5,6 +5,12 @@ Creates a message on an hourly basis in channel, updated with people that have u
 
 # Installation
 
+Install the `zx` shell:
+
+```
+brew install zx
+```
+
 Create a new Slack bot and grant it the following `Bot Token Scopes` under `OAuth & Permissions`:
   * `chat:write`
   * `users.profile:read`
@@ -31,3 +37,12 @@ in the .env accordingly.
 On the Unifi side, create a new token with `VIEW` permissions on `User & Group` and `System Log`.  Place that credential in the `.env` file,
 along with the API endpoint for the Unifi service.
 
+# Usage
+
+Install the `zx` shell, and then run `./main.mjs` via CRON every minute:
+
+```
+* * * * * cd doorbot && ./main.mjs > /dev/null 2>&1
+```
+
+It will leave a file `doorbot.json` in the working directory which tracks the message to update for each hour.
