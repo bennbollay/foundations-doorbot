@@ -19,7 +19,7 @@ Create a new Slack bot and grant it the following `Bot Token Scopes` under `OAut
 
 Reinstall the bot to the Slack Workspace.
 
-Take the `Bot User OAuth Token` and place it in the `.env` file, so that the file is fully populated:
+Take the `Bot User OAuth Token` and place it in the `.env` file:
 
 ```
 # Slack Configuration Values
