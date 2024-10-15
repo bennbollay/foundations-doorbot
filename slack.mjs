@@ -75,7 +75,7 @@ const createSlackMessageBlock = async (time, users) => {
                   image_url: user.pictureUrl,
                   alt_text: user.name,
                 }
-              : {},
+              : { type: 'mrkdwn', text: user.name[0] },
           ],
           {
             type: 'mrkdwn',
