@@ -4,6 +4,8 @@ process.loadEnvFile();
 
 const doorEndpoint = process.env.UNIFI_DOOR_API;
 const doorAuthToken = process.env.UNIFI_DOOR_TOKEN;
+// Only use ACCESS events from these devices.
+const allowedDoorDevices = process.env.UNIFI_DOOR_DEVICES.split(' ');
 
 const doorHeaders = {
   Authorization: `Bearer ${doorAuthToken}`,
@@ -37,7 +39,7 @@ const fetchDoorOpenings = async (timeBracket) => {
     }
 
     // Filter for only the front door of the space
-    if (record['target4.id'] != '5f925a8c-1b5c-4802-ad2c-cf70fb0c02fa') {
+    if (!allowedDoorDevices.includes(record['target4.id'])) {
       continue;
     }
 
