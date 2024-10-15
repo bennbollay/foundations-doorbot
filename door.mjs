@@ -18,6 +18,7 @@ const fetchDoorOpenings = async (timeBracket) => {
     until: Math.floor(timeBracket[1] / 1000),
     timezone: 'America/Los_Angeles',
   };
+
   const result = await fetch(`${doorEndpoint}/api/v1/developer/system/logs/export`, {
     method: 'POST',
     body: JSON.stringify(body),
@@ -34,6 +35,12 @@ const fetchDoorOpenings = async (timeBracket) => {
     if (record['event.result'] != 'ACCESS') {
       continue;
     }
+
+    // Filter for only the front door of the space
+    if (record['target4.id'] != '5f925a8c-1b5c-4802-ad2c-cf70fb0c02fa') {
+      continue;
+    }
+
     const name = record['actor.display_name'];
     if (name in openings) {
       continue;
