@@ -1,3 +1,7 @@
+const csv = require('csv-parse');
+
+process.loadEnvFile();
+
 const doorEndpoint = process.env.UNIFI_DOOR_API;
 const doorAuthToken = process.env.UNIFI_DOOR_TOKEN;
 

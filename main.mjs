@@ -1,7 +1,5 @@
 #!/usr/bin/env zx
 
-const csv = require('csv-parse');
-
 // Load configuration files from a .env file:
 //   # Slack Configuration Values
 //   SLACK_OAUTH_BOT_TOKEN=xoxb-...
@@ -81,7 +79,7 @@ const poll = async () => {
   }
 
   const status = getSlackStatus()[doorResult.when];
-  const newStr = new Date().toLocaleTimeString('en-US');
+  const nowStr = new Date().toLocaleTimeString('en-US');
   if (status) {
     console.log(`${nowStr}: Updating ${doorResult.users.length} entries`);
     await updateSlackMessage(status.ts, doorResult.message);

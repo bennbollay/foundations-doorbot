@@ -5,6 +5,10 @@ Creates a message on an hourly basis in channel, updated with people that have u
 
 # Installation
 
+Install node v22.
+
+Install homebrew.
+
 Install the `zx` shell:
 
 ```
@@ -39,10 +43,10 @@ along with the API endpoint for the Unifi service.
 
 # Usage
 
-Install the `zx` shell, and then run `./main.mjs` via CRON every minute:
+Install the `zx` shell, and then run `./main.mjs` via CRON every minute, and filter out the TLS certificate warning:
 
 ```
-* * * * * cd doorbot && ./main.mjs > /dev/null 2>&1
+* * * * * cd doorbot && /opt/homebrew/bin/zx ./main.mjs 2>&1 | grep -v NODE_TLS_REJECT_UNAUTHORIZED | grep -v "was created" > doorlog.txt
 ```
 
 It will leave a file `doorbot.json` in the working directory which tracks the message to update for each hour.

@@ -1,3 +1,5 @@
+process.loadEnvFile();
+
 const slackOAuthToken = process.env.SLACK_OAUTH_BOT_TOKEN;
 const slackChannelId = process.env.SLACK_CHANNEL_ID;
 
@@ -88,7 +90,7 @@ const createSlackMessageBlock = async (time, users) => {
 };
 
 const updateSlackMessage = async (ts, message) => {
-  const body = { channel: slackChannelId, ts, blocks: message.blocks };
+  const body = { channel: slackChannelId, ts, unfurl_links: false, blocks: message.blocks };
   const result = await fetch('https://slack.com/api/chat.update', {
     method: 'POST',
     headers: { ...slackHeaders },
@@ -102,7 +104,7 @@ const updateSlackMessage = async (ts, message) => {
 };
 
 const postSlackMessage = async (message) => {
-  const body = { channel: slackChannelId, blocks: message.blocks };
+  const body = { channel: slackChannelId, unfurl_links: false, blocks: message.blocks };
   const result = await fetch('https://slack.com/api/chat.postMessage', {
     method: 'POST',
     headers: { ...slackHeaders },
