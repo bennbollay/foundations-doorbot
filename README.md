@@ -44,6 +44,20 @@ along with the API endpoint for the Unifi service.
 
 Also, populate the list of allowed devices into the `UNIFI_DOOR_DEVICES` variable in the `.env`.
 
+Finally, you can create a `config.json` file that references the profile id fields (experimentally derived by looking at slack API responses) and any user-specific overrides desired:
+
+```
+{
+  "slackLinkedInProfileId": "Xf07RM6SNW3W",
+  "slackBlurbProfileId": "Xf07RC36BECE",
+  "specialUsers": {
+    "user@example.com": {
+      "pictureEmoji": ":heart:"
+    }
+  }
+}
+```
+
 # Usage
 
 Install the `zx` shell, and then run `./main.mjs` via CRON every minute, and filter out the TLS certificate warning:

@@ -90,4 +90,4 @@ const poll = async () => {
   }
 };
 
-export { getTimeBracket, poll };
+export { getTimeBracket, poll, pollDoor };

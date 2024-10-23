@@ -1,11 +1,24 @@
 process.loadEnvFile();
 
+const loadConfig = () => {
+  try {
+    const config = fs.readFileSync('./config.json', 'utf8');
+    return JSON.parse(config);
+  } catch (err) {
+    try {
+      fs.writeFileSync('./config.json', '{}');
+    } catch (err) {}
+  }
+  return {};
+};
+
+const slackConfig = loadConfig();
 const slackOAuthToken = process.env.SLACK_OAUTH_BOT_TOKEN;
 const slackChannelId = process.env.SLACK_CHANNEL_ID;
 
 // These were experimentally identified by looking at response payloads.
-const slackLinkedInProfileId = 'Xf07RM6SNW3W';
-const slackBlurbProfileId = 'Xf07RC36BECE';
+const slackLinkedInProfileId = slackConfig.slackLinkedInProfileId || '';
+const slackBlurbProfileId = slackConfig.slackBlurbProfileId || '';
 
 const slackHeaders = { Authorization: `Bearer ${slackOAuthToken}`, 'content-type': 'application/json; charset=utf-8' };
 
@@ -24,7 +37,7 @@ const fetchSlackUser = async (email) => {
     return undefined;
   }
 
-  return { slackId: res.user.id, pictureUrl: res.user.profile.image_24 };
+  return { slackId: res.user.id, pictureUrl: res.user.profile.image_24, ...(slackConfig?.specialUsers?.[email] || {}) };
 };
 
 const fetchSlackProfile = async (userId) => {
@@ -69,13 +82,15 @@ const createSlackMessageBlock = async (time, users) => {
             text: ' -',
           },
           ...[
-            user.pictureUrl
-              ? {
-                  type: 'image',
-                  image_url: user.pictureUrl,
-                  alt_text: user.name,
-                }
-              : { type: 'mrkdwn', text: user.name[0] },
+            user.pictureEmoji
+              ? { type: 'mrkdwn', text: user.pictureEmoji }
+              : user.pictureUrl
+                ? {
+                    type: 'image',
+                    image_url: user.pictureUrl,
+                    alt_text: user.name,
+                  }
+                : { type: 'mrkdwn', text: user.name[0] },
           ],
           {
             type: 'mrkdwn',
