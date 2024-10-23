@@ -63,7 +63,7 @@ const fetchSlackProfile = async (userId) => {
 
 const createSlackMessageBlock = async (time, users) => {
   const when = new Date(time);
-  const whenStr = when.toLocaleTimeString('en-US');
+  const whenStr = when.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
   const payload = {
     blocks: [
