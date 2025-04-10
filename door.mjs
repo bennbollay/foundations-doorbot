@@ -1,4 +1,5 @@
 const csv = require('csv-parse');
+import { sendDoorEventsToWebhook } from './webhook.mjs';
 
 process.loadEnvFile();
 
@@ -7,8 +8,7 @@ const doorAuthToken = process.env.UNIFI_DOOR_TOKEN;
 // Only use ACCESS events from these devices.
 const allowedDoorDevices = process.env.UNIFI_DOOR_DEVICES.split(' ');
 // Door access webhook API endpoint and API key
-const doorWebhookEndpoint = process.env.DOOR_ACCESS_WEBHOOK_ENDPOINT;
-const doorWebhookApiKey = process.env.DOOR_ACCESS_WEBHOOK_API_KEY;
+// Removed doorWebhookEndpoint and doorWebhookApiKey as they're now in webhook.mjs
 
 const doorHeaders = {
   Authorization: `Bearer ${doorAuthToken}`,
@@ -16,29 +16,7 @@ const doorHeaders = {
   'Content-Type': 'application/json',
 };
 
-const sendDoorEventsToWebhook = async (events) => {
-  if (!doorWebhookEndpoint || !doorWebhookApiKey) {
-    console.log('Door webhook endpoint or API key not configured, skipping webhook call');
-    return;
-  }
-
-  try {
-    const result = await fetch(doorWebhookEndpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': doorWebhookApiKey,
-      },
-      body: JSON.stringify(events),
-    });
-
-    const response = await result.json();
-    console.log('Door webhook response:', response);
-    return response;
-  } catch (error) {
-    console.error('Error sending door events to webhook:', error);
-  }
-};
+// Removed sendDoorEventsToWebhook function as it's now in webhook.mjs
 
 const fetchDoorOpenings = async (timeBracket) => {
   const body = {
