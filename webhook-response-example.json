@@ -1,0 +1,37 @@
+{
+  "success": true,
+  "message": "Processed 5 of 5 door access events successfully",
+  "results": {
+    "successful": 5,
+    "total": 5,
+    "details": "All events processed and stored"
+  },
+  "newMembers": [
+    {
+      "firstName": "Alice",
+      "lastName": "Johnson",
+      "email": "alice.johnson@company.com"
+    },
+    {
+      "firstName": "Bob",
+      "lastName": "Williams",
+      "email": "bob.williams@company.com"
+    },
+    {
+      "firstName": "Carol",
+      "lastName": "Davis",
+      "email": "carol.davis@company.com"
+    }
+  ],
+  "managedAccess": {
+    "activate": [
+      "returning.employee@company.com",
+      "contractor.smith@external.com",
+      "temp.worker@company.com"
+    ],
+    "deactivate": [
+      "departed.employee@company.com",
+      "expired.contractor@external.com"
+    ]
+  }
+}
