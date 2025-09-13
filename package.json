@@ -5,6 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "doorbot": "node cli.mjs",
+    "create": "node cli.mjs create",
     "activate": "node cli.mjs activate",
     "deactivate": "node cli.mjs deactivate",
     "status": "node cli.mjs status"

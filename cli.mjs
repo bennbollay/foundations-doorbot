@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import { activateUser, deactivateUser, getUserStatus, activateUserById, deactivateUserById, getUserStatusById } from './access.mjs';
+import { activateUser, deactivateUser, getUserStatus, activateUserById, deactivateUserById, getUserStatusById, createUser } from './access.mjs';
 
 const program = new Command();
 
@@ -70,6 +70,25 @@ program
       process.exit(0);
     } else {
       console.error(`❌ User not found: ${emailOrId}\n`);
+      process.exit(1);
+    }
+  });
+
+// Create user command
+program
+  .command('create <firstName> <lastName> <email>')
+  .description('Create a new user with door access')
+  .action(async (firstName, lastName, email) => {
+    console.log(`\n👤 Creating user: ${firstName} ${lastName} (${email})\n`);
+    const result = await createUser(firstName, lastName, email);
+    if (result && result.success) {
+      console.log(`✅ Successfully created user: ${result.user.fullName}`);
+      console.log(`  Email: ${result.user.email}`);
+      console.log(`  User ID: ${result.user.id}`);
+      console.log(`  Status: ${result.user.status}\n`);
+      process.exit(0);
+    } else {
+      console.error(`❌ Failed to create user: ${result?.error || 'Unknown error'}\n`);
       process.exit(1);
     }
   });

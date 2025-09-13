@@ -284,6 +284,82 @@ export async function setUserStatus(userId, activate = false) {
   return false;
 }
 
+// Create a new user
+export async function createUser(firstName, lastName, email) {
+  const auth = await getAuthToken();
+  
+  console.log(`Creating user: ${firstName} ${lastName} (${email})...`);
+  
+  // Use the exact endpoint from browser capture
+  const url = `${IDENTITY_BASE}/proxy/access/api/v2/user`;
+  
+  const headers = {
+    'Accept': 'application/json, text/plain, */*',
+    'Content-Type': 'application/json',
+    'Origin': 'https://unifi.ui.com',
+    'Referer': 'https://unifi.ui.com/',
+    'Cookie': `TOKEN=${auth.token}`
+  };
+  
+  if (auth.csrf) {
+    headers['X-Csrf-Token'] = auth.csrf;
+  }
+
+  // Payload matching browser capture
+  const payload = {
+    first_name: firstName,
+    last_name: lastName,
+    group_ids: [],
+    nfc_token: "",
+    force_add_nfc: true,
+    employee_number: "",
+    pin_code: "",
+    user_email: email,
+    onboard_time: 0
+  };
+
+  try {
+    console.log(`POST ${url}`);
+    const res = await fetch(url, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(payload)
+    });
+
+    if (res.ok) {
+      const result = await res.json();
+      if (result.code === 1 || result.codeS === 'SUCCESS') {
+        const newUser = result.data;
+        console.log(`✅ Successfully created user: ${newUser.full_name} (ID: ${newUser.unique_id})`);
+        return {
+          success: true,
+          user: {
+            id: newUser.unique_id,
+            email: newUser.user_email || email,
+            firstName: newUser.first_name,
+            lastName: newUser.last_name,
+            fullName: newUser.full_name,
+            status: newUser.status
+          }
+        };
+      } else {
+        console.error(`Failed to create user: ${result.msg || result.error || 'Unknown error'}`);
+        return { success: false, error: result.msg || result.error || 'Unknown error' };
+      }
+    } else {
+      const text = await res.text();
+      console.log(`Failed: ${res.status} ${res.statusText}`);
+      if (text && text.length < 500 && !text.includes('<!DOCTYPE')) {
+        console.log('Response:', text);
+      }
+      return { success: false, error: `${res.status} ${res.statusText}` };
+    }
+  } catch (e) {
+    console.log(`Error: ${e.message}`);
+    return { success: false, error: e.message };
+  }
+}
+
 // High-level functions
 export async function activateUserByEmail(email) {
   const user = await findUserByEmail(email);

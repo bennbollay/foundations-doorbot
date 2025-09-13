@@ -97,6 +97,14 @@ The system will automatically:
 
 ### Available Commands
 
+#### Create a New User ✅ (WORKING)
+Create a new user with door access:
+```bash
+npm run doorbot create FirstName LastName user@example.com
+# Example:
+npm run doorbot create John Doe john.doe@example.com
+```
+
 #### Activate a User ✅ (WORKING)
 Activate door access for a user by email:
 ```bash
@@ -120,6 +128,7 @@ npm run doorbot status user@example.com
 You can also use the shorter npm scripts:
 ```bash
 # These commands will show help for the specific action
+npm run create
 npm run activate
 npm run deactivate
 npm run status
@@ -127,6 +136,7 @@ npm run status
 
 Or run the CLI directly:
 ```bash
+node cli.mjs create FirstName LastName user@example.com
 node cli.mjs activate user@example.com
 node cli.mjs deactivate user@example.com
 node cli.mjs status user@example.com
@@ -141,6 +151,7 @@ npm link
 
 Then you can use:
 ```bash
+doorbot create FirstName LastName user@example.com
 doorbot activate user@example.com
 doorbot deactivate user@example.com
 doorbot status user@example.com
@@ -151,6 +162,7 @@ doorbot status user@example.com
 ⚠️ **Warning**: This uses unofficial UniFi APIs that may change without notice.
 
 **Current Status:**
+- ✅ **User creation is fully working** - Successfully creates new users with door access
 - ✅ **User activation is fully working** - Successfully activates users via the Identity API
 - ✅ **User deactivation is fully working** - Successfully deactivates users via the Identity API
 - ✅ **User status lookup is fully working** - Can check if users are active or deactivated
@@ -159,6 +171,7 @@ doorbot status user@example.com
 - Uses the UniFi Identity cloud service at `d8b3705351d507855f7d07e296d4064690a08.id.ui.direct`
 - Requires root/admin credentials with access to UniFi Identity
 - Authentication tokens are cached locally in `.direct_identity_auth.json`
+- The create user endpoint matches the browser's exact API call: `POST /proxy/access/api/v2/user`
 - The activation endpoint matches the browser's exact API call: `PUT /proxy/users/api/v2/user/{userId}/active?isULP=1`
 - The deactivation endpoint matches the browser's exact API call: `PUT /proxy/users/api/v2/user/{userId}/deactivate?isULP=1`
 
