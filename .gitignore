@@ -5,3 +5,5 @@ doorlog.json
 doorlog.txt
 .token.json
 test-login.mjs
+.identity_auth.json
+.unifi_auth.json
