@@ -5,7 +5,8 @@ import {
   createUser, 
   activateUser, 
   deactivateUser,
-  getUserStatus 
+  getUserStatus,
+  resendInvitation 
 } from './access.mjs';
 
 // Door access webhook API endpoint and API key
@@ -147,6 +148,54 @@ const processManagedAccess = async (managedAccess) => {
 };
 
 /**
+ * Process invitation resends from webhook response
+ * @param {Array} newInvites - Array of email addresses to resend invitations to
+ * @returns {Object} Results of invitation resending
+ */
+const processInviteResends = async (newInvites) => {
+  const results = {
+    sent: [],
+    failed: [],
+    notFound: []
+  };
+
+  for (const email of newInvites) {
+    try {
+      console.log(`Resending invitation to: ${email}`);
+      const result = await resendInvitation(email);
+      
+      if (result.success) {
+        results.sent.push({
+          email,
+          userId: result.userId,
+          message: 'Invitation resent successfully'
+        });
+      } else if (result.error === 'User not found') {
+        results.notFound.push({
+          email,
+          message: 'User not found'
+        });
+      } else {
+        results.failed.push({
+          email,
+          error: result.error,
+          message: 'Failed to resend invitation'
+        });
+      }
+    } catch (error) {
+      console.error(`Failed to resend invitation to ${email}:`, error);
+      results.failed.push({
+        email,
+        error: error.message,
+        message: 'Failed to resend invitation'
+      });
+    }
+  }
+
+  return results;
+};
+
+/**
  * Sends door access events to a webhook endpoint and processes the response
  * @param {Array} events - Array of door access events
  * @returns {Object} Response from webhook with processing results
@@ -188,6 +237,12 @@ export const sendDoorEventsToWebhook = async (events) => {
       }
     }
 
+    // Process invitation resends if present
+    if (response.newInvite && Array.isArray(response.newInvite)) {
+      console.log(`Processing ${response.newInvite.length} invitation resends...`);
+      processingResults.inviteResends = await processInviteResends(response.newInvite);
+    }
+
     // Log summary
     if (processingResults.memberCreation) {
       console.log('Member creation summary:', {
@@ -204,6 +259,14 @@ export const sendDoorEventsToWebhook = async (events) => {
         alreadyActive: processingResults.accessManagement.alreadyActive.length,
         alreadyInactive: processingResults.accessManagement.alreadyInactive.length,
         failed: processingResults.accessManagement.failed.length
+      });
+    }
+
+    if (processingResults.inviteResends) {
+      console.log('Invitation resend summary:', {
+        sent: processingResults.inviteResends.sent.length,
+        notFound: processingResults.inviteResends.notFound.length,
+        failed: processingResults.inviteResends.failed.length
       });
     }
 

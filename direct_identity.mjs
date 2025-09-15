@@ -1,6 +1,8 @@
 // Direct UniFi Identity implementation
 // This module directly uses the Identity cloud endpoint from browser capture
 
+process.loadEnvFile();
+
 import fs from 'fs';
 import { execSync } from 'child_process';
 
@@ -392,4 +394,127 @@ export async function getUserStatus(email) {
     status: user.status || 'UNKNOWN',
     isActive: user.status === 'ACTIVE' || user.status === 'active'
   };
+}
+
+/**
+ * Resend invitation to a user
+ * @param {string} email - User email to resend invitation to
+ * @returns {Object} Result of the invitation resend
+ */
+export async function resendInvitation(email) {
+  const auth = await getAuthToken();
+  
+  console.log(`Resending invitation to: ${email}`);
+  
+  // First find the user to get their ID
+  const user = await findUserByEmail(email);
+  if (!user) {
+    console.error(`User ${email} not found`);
+    return {
+      success: false,
+      error: 'User not found',
+      email
+    };
+  }
+  
+  // Step 1: Get the invitation link first
+  const inviteLinkUrl = `${IDENTITY_BASE}/proxy/users/api/v2/identity/user/${user.id}/invitation_link`;
+  
+  const headers = {
+    'Accept': 'application/json, text/plain, */*',
+    'Origin': 'https://unifi.ui.com',
+    'Referer': 'https://unifi.ui.com/',
+    'Cookie': `TOKEN=${auth.token}`
+  };
+  
+  if (auth.csrf) {
+    headers['X-Csrf-Token'] = auth.csrf;
+  }
+  
+  try {
+    // Get the invitation link data
+    console.log(`GET ${inviteLinkUrl}`);
+    const linkRes = await fetch(inviteLinkUrl, {
+      method: 'GET',
+      headers
+    });
+    
+    if (!linkRes.ok) {
+      const errorText = await linkRes.text();
+      console.error(`Failed to get invitation link (${linkRes.status}): ${errorText}`);
+      return {
+        success: false,
+        email,
+        error: `Failed to get invitation link: ${errorText}`
+      };
+    }
+    
+    const linkData = await linkRes.json();
+    if (!linkData.data || !linkData.data.link) {
+      console.error('Invalid invitation link response:', linkData);
+      return {
+        success: false,
+        email,
+        error: 'Invalid invitation link response'
+      };
+    }
+    
+    // Step 2: Send the invitation using the retrieved link data
+    const sendUrl = `${IDENTITY_BASE}/proxy/users/api/v2/identity/user/${user.id}/send_invitation`;
+    
+    // Build payload from the invitation link data
+    const payload = {
+      link: linkData.data.link,
+      email: email,
+      link_id: linkData.data.id,
+      token: linkData.data.shared_token,
+      code: linkData.data.code
+    };
+    
+    console.log(`POST ${sendUrl}`);
+    const sendRes = await fetch(sendUrl, {
+      method: 'POST',
+      headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+    
+    if (sendRes.ok) {
+      const result = await sendRes.json();
+      if (result.code === 1 || result.codeS === 'SUCCESS1' || result.codeS === 'SUCCESS') {
+        console.log(`✅ Successfully resent invitation to: ${email}`);
+        return {
+          success: true,
+          email,
+          userId: user.id,
+          message: 'Invitation resent successfully',
+          invitationCode: linkData.data.code
+        };
+      } else {
+        console.error(`Failed to resend invitation: ${result.msg || result.codeS}`);
+        return {
+          success: false,
+          email,
+          error: result.msg || result.codeS || 'Unknown error'
+        };
+      }
+    } else {
+      const errorText = await sendRes.text();
+      console.error(`Failed to resend invitation (${sendRes.status}): ${errorText}`);
+      return {
+        success: false,
+        email,
+        error: `HTTP ${sendRes.status}: ${errorText}`
+      };
+    }
+  } catch (error) {
+    console.error(`Error resending invitation to ${email}:`, error);
+    return {
+      success: false,
+      email,
+      error: error.message
+    };
+  }
 }

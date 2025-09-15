@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import { activateUser, deactivateUser, getUserStatus, activateUserById, deactivateUserById, getUserStatusById, createUser } from './access.mjs';
+import { activateUser, deactivateUser, getUserStatus, activateUserById, deactivateUserById, getUserStatusById, createUser, resendInvitation } from './access.mjs';
 
 const program = new Command();
 
@@ -89,6 +89,27 @@ program
       process.exit(0);
     } else {
       console.error(`❌ Failed to create user: ${result?.error || 'Unknown error'}\n`);
+      process.exit(1);
+    }
+  });
+
+// Resend invitation command
+program
+  .command('resend-invite <email>')
+  .description('Resend invitation email to a user')
+  .action(async (email) => {
+    console.log(`\n📧 Resending invitation to: ${email}\n`);
+    const result = await resendInvitation(email);
+    if (result && result.success) {
+      console.log(`✅ Successfully resent invitation to: ${email}`);
+      console.log(`  User ID: ${result.userId}`);
+      if (result.invitationCode) {
+        console.log(`  Invitation Code: ${result.invitationCode}`);
+      }
+      console.log(`  Message: ${result.message}\n`);
+      process.exit(0);
+    } else {
+      console.error(`❌ Failed to resend invitation: ${result?.error || 'Unknown error'}\n`);
       process.exit(1);
     }
   });

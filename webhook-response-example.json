@@ -33,5 +33,10 @@
       "departed.employee@company.com",
       "expired.contractor@external.com"
     ]
-  }
+  },
+  "newInvite": [
+    "pending.user@company.com",
+    "needs.reinvite@company.com",
+    "lost.email@company.com"
+  ]
 }

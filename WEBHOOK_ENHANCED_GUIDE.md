@@ -6,6 +6,7 @@ The doorbot webhook integration has been enhanced to support bidirectional commu
 
 1. **Creating new members** - Automatically provision new users in UniFi Access
 2. **Managing access** - Activate or deactivate user access based on external criteria
+3. **Resending invitations** - Resend invitation emails to existing users
 
 ## Webhook Response Format
 
@@ -29,7 +30,8 @@ The webhook service should return a JSON response with the following structure:
   "managedAccess": {
     "activate": ["user1@example.com", "user2@example.com"],
     "deactivate": ["user3@example.com", "user4@example.com"]
-  }
+  },
+  "newInvite": ["user5@example.com", "user6@example.com"]
 }
 ```
 
@@ -65,14 +67,24 @@ The system will:
 3. Change status if needed
 4. Report results for each operation
 
+### newInvite (optional)
+Array of email addresses to resend invitations to. Each email should belong to an existing user.
+
+The system will:
+1. Look up each user by email
+2. Resend the invitation if user exists
+3. Report if user not found
+4. Track results for each invitation
+
 ## Processing Flow
 
 1. **Door events are sent** to the webhook endpoint
 2. **Webhook processes** the events and determines any needed actions
-3. **Webhook responds** with standard fields plus optional `newMembers` and/or `managedAccess`
+3. **Webhook responds** with standard fields plus optional `newMembers`, `managedAccess`, and/or `newInvite`
 4. **Doorbot processes** the response:
    - Creates new members if specified
    - Manages access states if specified
+   - Resends invitations if specified
    - Logs all results
 
 ## Implementation Details
@@ -101,6 +113,15 @@ The system will:
 4. Track results
 ```
 
+### Invitation Resend Process
+```javascript
+// For each email in newInvite array:
+1. Look up user: getUserByEmail(email)
+2. If not found: Log and track as not found
+3. If exists: resendInvitation(email)
+4. Track results (sent/failed)
+```
+
 ## Results Tracking
 
 The enhanced webhook function returns detailed results:
@@ -119,6 +140,11 @@ The enhanced webhook function returns detailed results:
     alreadyActive: [ /* users already active */ ],
     alreadyInactive: [ /* users already inactive */ ],
     failed: [ /* failed operations */ ]
+  },
+  inviteResends: {
+    sent: [ /* successfully sent invitations */ ],
+    notFound: [ /* users not found */ ],
+    failed: [ /* failed send attempts */ ]
   }
 }
 ```

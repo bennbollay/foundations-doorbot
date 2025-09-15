@@ -8,3 +8,4 @@ test-login.mjs
 .identity_auth.json
 .unifi_auth.json
 .direct_identity_auth.json
+*.json

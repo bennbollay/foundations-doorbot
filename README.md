@@ -123,6 +123,12 @@ Check the current access status of a user:
 npm run doorbot status user@example.com
 ```
 
+#### Resend Invitation ✅ (WORKING)
+Resend an invitation email to an existing user:
+```bash
+npm run doorbot resend-invite user@example.com
+```
+
 ### Alternative Usage
 
 You can also use the shorter npm scripts:
@@ -140,6 +146,7 @@ node cli.mjs create FirstName LastName user@example.com
 node cli.mjs activate user@example.com
 node cli.mjs deactivate user@example.com
 node cli.mjs status user@example.com
+node cli.mjs resend-invite user@example.com
 ```
 
 ### Global Installation (Optional)
