@@ -202,6 +202,11 @@ const processInviteResends = async (newInvites) => {
  */
 export const sendDoorEventsToWebhook = async (events) => {
   try {
+    // Log when calling with empty events (for pending actions)
+    if (events.length === 0) {
+      console.log('Calling webhook with empty events array to check for pending actions...');
+    }
+    
     const result = await fetch(doorWebhookEndpoint, {
       method: 'POST',
       headers: {

@@ -84,10 +84,9 @@ const fetchDoorOpenings = async (timeBracket) => {
     };
   }
 
-  // Send all successful events to webhook
-  if (successfulEvents.length > 0) {
-    await sendDoorEventsToWebhook(successfulEvents);
-  }
+  // Always send events to webhook (even if empty array)
+  // The webhook may have pending actions to return regardless of new events
+  await sendDoorEventsToWebhook(successfulEvents);
 
   return { data: Object.values(openings).reverse(), timeBracket };
 };

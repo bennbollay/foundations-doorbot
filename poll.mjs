@@ -74,7 +74,7 @@ const poll = async () => {
 
   const doorResult = await pollDoor(timeBracket);
   if (doorResult.users.length == 0) {
-    console.log(`${new Date().toLocaleTimeString('en-US')}: No entries`);
+    console.log(`${new Date().toLocaleTimeString('en-US')}: No entries (webhook still called for pending actions)`);
     return;
   }
 
