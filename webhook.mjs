@@ -225,23 +225,29 @@ export const sendDoorEventsToWebhook = async (events) => {
       processingResults.memberCreation = await processNewMembers(response.newMembers);
     }
 
-    // Process managed access changes and support top-level permanentDeactivate
-    const activateList = Array.isArray(response.managedAccess?.activate)
-      ? response.managedAccess.activate
-      : [];
-    const deactivateCombined = [
-      ...(Array.isArray(response.managedAccess?.deactivate) ? response.managedAccess.deactivate : []),
-      ...(Array.isArray(response.permanentDeactivate) ? response.permanentDeactivate : [])
-    ];
-    const deactivateList = [...new Set(deactivateCombined)];
+    // Process managed access changes if present
+    if (response.managedAccess) {
+      const totalChanges = 
+        (response.managedAccess.activate?.length || 0) + 
+        (response.managedAccess.deactivate?.length || 0);
+      
+      if (totalChanges > 0) {
+        console.log(`Processing ${totalChanges} access management changes...`);
+        processingResults.accessManagement = await processManagedAccess(response.managedAccess);
+      }
+    }
 
-    const totalChanges = (activateList.length) + (deactivateList.length);
-    if (totalChanges > 0) {
-      console.log(`Processing ${totalChanges} access management changes... (activate: ${activateList.length}, deactivate: ${deactivateList.length})`);
-      processingResults.accessManagement = await processManagedAccess({
-        activate: activateList,
-        deactivate: deactivateList
-      });
+    // Process permanent deactivations if present (separate from managedAccess)
+    if (response.permanentDeactivate && Array.isArray(response.permanentDeactivate)) {
+      console.log(`Processing ${response.permanentDeactivate.length} permanent deactivations...`);
+      
+      // Create a managedAccess-like structure for permanent deactivations
+      const permanentDeactivateAccess = {
+        activate: [],
+        deactivate: response.permanentDeactivate
+      };
+      
+      processingResults.permanentDeactivations = await processManagedAccess(permanentDeactivateAccess);
     }
 
     // Process invitation resends if present
@@ -266,6 +272,14 @@ export const sendDoorEventsToWebhook = async (events) => {
         alreadyActive: processingResults.accessManagement.alreadyActive.length,
         alreadyInactive: processingResults.accessManagement.alreadyInactive.length,
         failed: processingResults.accessManagement.failed.length
+      });
+    }
+
+    if (processingResults.permanentDeactivations) {
+      console.log('Permanent deactivation summary:', {
+        deactivated: processingResults.permanentDeactivations.deactivated.length,
+        alreadyInactive: processingResults.permanentDeactivations.alreadyInactive.length,
+        failed: processingResults.permanentDeactivations.failed.length
       });
     }
 

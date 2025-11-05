@@ -31,6 +31,7 @@ The webhook service should return a JSON response with the following structure:
     "activate": ["user1@example.com", "user2@example.com"],
     "deactivate": ["user3@example.com", "user4@example.com"]
   },
+  "permanentDeactivate": ["user7@example.com", "user8@example.com"],
   "newInvite": ["user5@example.com", "user6@example.com"]
 }
 ```
@@ -67,6 +68,15 @@ The system will:
 3. Change status if needed
 4. Report results for each operation
 
+### permanentDeactivate (optional)
+Array of email addresses for permanent user deactivations. This is treated separately from `managedAccess.deactivate` to allow for different business logic or audit requirements for permanent vs temporary deactivations.
+
+The system will:
+1. Check current status of each user
+2. Skip if already inactive
+3. Deactivate if active
+4. Report results for each operation
+
 ### newInvite (optional)
 Array of email addresses to resend invitations to. Each email should belong to an existing user.
 
@@ -80,10 +90,11 @@ The system will:
 
 1. **Door events are sent** to the webhook endpoint
 2. **Webhook processes** the events and determines any needed actions
-3. **Webhook responds** with standard fields plus optional `newMembers`, `managedAccess`, and/or `newInvite`
+3. **Webhook responds** with standard fields plus optional `newMembers`, `managedAccess`, `permanentDeactivate`, and/or `newInvite`
 4. **Doorbot processes** the response:
    - Creates new members if specified
    - Manages access states if specified
+   - Processes permanent deactivations if specified
    - Resends invitations if specified
    - Logs all results
 
@@ -138,6 +149,11 @@ The enhanced webhook function returns detailed results:
     activated: [ /* successfully activated users */ ],
     deactivated: [ /* successfully deactivated users */ ],
     alreadyActive: [ /* users already active */ ],
+    alreadyInactive: [ /* users already inactive */ ],
+    failed: [ /* failed operations */ ]
+  },
+  permanentDeactivations: {
+    deactivated: [ /* successfully deactivated users */ ],
     alreadyInactive: [ /* users already inactive */ ],
     failed: [ /* failed operations */ ]
   },
