@@ -225,16 +225,23 @@ export const sendDoorEventsToWebhook = async (events) => {
       processingResults.memberCreation = await processNewMembers(response.newMembers);
     }
 
-    // Process managed access changes if present
-    if (response.managedAccess) {
-      const totalChanges = 
-        (response.managedAccess.activate?.length || 0) + 
-        (response.managedAccess.deactivate?.length || 0);
-      
-      if (totalChanges > 0) {
-        console.log(`Processing ${totalChanges} access management changes...`);
-        processingResults.accessManagement = await processManagedAccess(response.managedAccess);
-      }
+    // Process managed access changes and support top-level permanentDeactivate
+    const activateList = Array.isArray(response.managedAccess?.activate)
+      ? response.managedAccess.activate
+      : [];
+    const deactivateCombined = [
+      ...(Array.isArray(response.managedAccess?.deactivate) ? response.managedAccess.deactivate : []),
+      ...(Array.isArray(response.permanentDeactivate) ? response.permanentDeactivate : [])
+    ];
+    const deactivateList = [...new Set(deactivateCombined)];
+
+    const totalChanges = (activateList.length) + (deactivateList.length);
+    if (totalChanges > 0) {
+      console.log(`Processing ${totalChanges} access management changes... (activate: ${activateList.length}, deactivate: ${deactivateList.length})`);
+      processingResults.accessManagement = await processManagedAccess({
+        activate: activateList,
+        deactivate: deactivateList
+      });
     }
 
     // Process invitation resends if present
