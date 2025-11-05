@@ -37,12 +37,17 @@ function saveAuth(authData) {
 }
 
 // Get auth token and CSRF
-async function getAuthToken() {
+export async function getAuthToken() {
   // Check cache first
   const cached = loadAuth();
   if (cached && cached.token) {
     console.log('Using cached Identity token');
-    return cached;
+    // Validate that the token is not just an empty object
+    if (typeof cached.token === 'string' && cached.token.length > 0) {
+      return cached;
+    } else {
+      console.log('Cached token is invalid, re-authenticating...');
+    }
   }
 
   const username = process.env.UNIFI_CLOUD_USERNAME || 'root';
@@ -158,7 +163,7 @@ Or manually set these environment variables:
 }
 
 // Find user by email
-export async function findUserByEmail(email) {
+export async function findUserByEmail(email, retryOnAuth = true) {
   const auth = await getAuthToken();
   
   console.log(`Looking up user: ${email}`);
@@ -185,6 +190,15 @@ export async function findUserByEmail(email) {
     try {
       console.log(`Trying: ${url}`);
       const res = await fetch(url, { headers });
+      
+      // If we get 401, clear cache and retry once
+      if (res.status === 401 && retryOnAuth) {
+        console.log('Got 401 Unauthorized, clearing cache and retrying...');
+        // Clear the cached auth
+        try { fs.unlinkSync(AUTH_CACHE_FILE); } catch {}
+        // Retry with fresh auth
+        return findUserByEmail(email, false);
+      }
       
       if (res.ok) {
         const data = await res.json();

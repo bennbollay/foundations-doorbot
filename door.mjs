@@ -86,7 +86,13 @@ const fetchDoorOpenings = async (timeBracket) => {
 
   // Always send events to webhook (even if empty array)
   // The webhook may have pending actions to return regardless of new events
-  await sendDoorEventsToWebhook(successfulEvents);
+  try {
+    await sendDoorEventsToWebhook(successfulEvents);
+  } catch (error) {
+    console.error('Warning: Webhook call failed, continuing without webhook processing');
+    console.error('Webhook error:', error.message);
+    // Continue execution even if webhook fails
+  }
 
   return { data: Object.values(openings).reverse(), timeBracket };
 };

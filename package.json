@@ -8,7 +8,8 @@
     "create": "node cli.mjs create",
     "activate": "node cli.mjs activate",
     "deactivate": "node cli.mjs deactivate",
-    "status": "node cli.mjs status"
+    "status": "node cli.mjs status",
+    "refresh-auth": "node refresh-auth.mjs"
   },
   "bin": {
     "doorbot": "./cli.mjs"

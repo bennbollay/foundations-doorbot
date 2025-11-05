@@ -201,12 +201,19 @@ const processInviteResends = async (newInvites) => {
  * @returns {Object} Response from webhook with processing results
  */
 export const sendDoorEventsToWebhook = async (events) => {
+  // Check if webhook is configured
+  if (!doorWebhookEndpoint || !doorWebhookApiKey) {
+    console.log('Webhook not configured (missing DOOR_ACCESS_WEBHOOK_ENDPOINT or DOOR_ACCESS_WEBHOOK_API_KEY)');
+    return { webhookResponse: { skipped: true, reason: 'Not configured' } };
+  }
+  
   try {
     // Log when calling with empty events (for pending actions)
     if (events.length === 0) {
       console.log('Calling webhook with empty events array to check for pending actions...');
     }
     
+    console.log(`Calling webhook at: ${doorWebhookEndpoint}`);
     const result = await fetch(doorWebhookEndpoint, {
       method: 'POST',
       headers: {
@@ -215,6 +222,22 @@ export const sendDoorEventsToWebhook = async (events) => {
       },
       body: JSON.stringify(events),
     });
+
+    // Check if response is ok and content type is JSON
+    if (!result.ok) {
+      const text = await result.text();
+      console.error(`Webhook returned error ${result.status}: ${result.statusText}`);
+      console.error('Response body:', text.substring(0, 500)); // First 500 chars
+      throw new Error(`Webhook returned ${result.status}: ${result.statusText}`);
+    }
+
+    const contentType = result.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      const text = await result.text();
+      console.error('Webhook returned non-JSON response. Content-Type:', contentType);
+      console.error('Response body:', text.substring(0, 500)); // First 500 chars
+      throw new Error('Webhook returned non-JSON response');
+    }
 
     const response = await result.json();
     console.log('Door webhook response:', response);
