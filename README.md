@@ -183,3 +183,68 @@ doorbot status user@example.com
 - The deactivation endpoint matches the browser's exact API call: `PUT /proxy/users/api/v2/user/{userId}/deactivate?isULP=1`
 
 **Recommendation**: Always maintain a backup of your UniFi configuration before using these commands.
+
+## Camera Snapshot API
+
+This repo can also run a small HTTP API that returns the current snapshot for every camera in UniFi Protect.
+
+It uses the same auth pattern as the door access logs: cookie-based login via `UNIFI_DOOR_API` host with username/password credentials.
+
+### Environment
+
+Add these values to your `.env`:
+
+```bash
+CAMERA_API_PORT=8787
+CAMERA_API_PATH=/api/camera-snapshots
+CAMERA_API_KEY=replace-with-your-api-key
+
+# Protect uses the same console as UNIFI_DOOR_API (without the :12445 port)
+# and the same credentials as UNIFI_CLOUD_USERNAME/PASSWORD
+# Override with UNIFI_PROTECT_USERNAME/PASSWORD if needed
+```
+
+Notes:
+- The Protect base URL is derived from `UNIFI_DOOR_API` by stripping the `:12445` port. No separate Protect URL is needed.
+- Protect credentials fall back to `UNIFI_CLOUD_USERNAME`/`UNIFI_CLOUD_PASSWORD` if `UNIFI_PROTECT_USERNAME`/`UNIFI_PROTECT_PASSWORD` are not set.
+
+### Run the API
+
+```bash
+npm run camera-api
+```
+
+### Request snapshots
+
+```bash
+curl -H "x-api-key: replace-with-your-api-key" \
+  "http://localhost:8787/api/camera-snapshots"
+```
+
+To disable the high-quality snapshot flag:
+
+```bash
+curl -H "x-api-key: replace-with-your-api-key" \
+  "http://localhost:8787/api/camera-snapshots?highQuality=false"
+```
+
+The response is JSON with one entry per camera:
+
+```json
+{
+  "generatedAt": "2026-03-09T00:00:00.000Z",
+  "totalCameras": 2,
+  "succeeded": 2,
+  "failed": 0,
+  "cameras": [
+    {
+      "id": "camera-id",
+      "name": "Front Door",
+      "contentType": "image/jpeg",
+      "snapshotBase64": "/9j/4AAQSk..."
+    }
+  ]
+}
+```
+
+Each camera entry may instead include an `error` field if that particular snapshot request fails.
