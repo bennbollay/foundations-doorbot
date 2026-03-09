@@ -9,3 +9,5 @@ test-login.mjs
 .unifi_auth.json
 .direct_identity_auth.json
 *.json
+camera-api.log
+camera-api.err.log
