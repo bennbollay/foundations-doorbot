@@ -11,8 +11,8 @@
     "status": "node cli.mjs status",
     "refresh-auth": "node refresh-auth.mjs",
     "camera-api": "node camera-api-server.mjs",
-    "camera-api:install": "cp com.foundations.camera-api.plist ~/Library/LaunchAgents/ && launchctl load ~/Library/LaunchAgents/com.foundations.camera-api.plist",
-    "camera-api:uninstall": "launchctl unload ~/Library/LaunchAgents/com.foundations.camera-api.plist 2>/dev/null; rm -f ~/Library/LaunchAgents/com.foundations.camera-api.plist",
+    "camera-api:install": "bash install-camera-api.sh",
+    "camera-api:uninstall": "launchctl unload ~/Library/LaunchAgents/com.foundations.camera-api.plist 2>/dev/null; rm -f ~/Library/LaunchAgents/com.foundations.camera-api.plist && echo 'Uninstalled com.foundations.camera-api'",
     "camera-api:logs": "tail -f camera-api.log camera-api.err.log"
   },
   "bin": {
