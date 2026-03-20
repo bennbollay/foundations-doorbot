@@ -18,6 +18,54 @@ const doorHeaders = {
 
 // Removed sendDoorEventsToWebhook function as it's now in webhook.mjs
 
+const getNonEmptyRecordValue = (record, keys) => {
+  for (const key of keys) {
+    const value = record[key];
+    if (value === undefined || value === null) {
+      continue;
+    }
+
+    const normalized = String(value).trim();
+    if (normalized) {
+      return normalized;
+    }
+  }
+
+  return undefined;
+};
+
+const getDoorAccessMethod = (record) => {
+  const knownValue = getNonEmptyRecordValue(record, [
+    'authentication.credential_provider',
+    'authentication.credential_provider.display_name',
+    'authentication.provider',
+    'authentication.provider.display_name',
+    'credential_provider',
+    'credential_provider.display_name',
+    'credential.display_name',
+    'credential.type',
+    'authentication.method',
+    'authentication.type',
+    'access.method',
+    'access_method',
+    'unlock_method',
+  ]);
+
+  if (knownValue) {
+    return knownValue;
+  }
+
+  const discoveredValue = Object.entries(record).find(([key, value]) => {
+    if (value === undefined || value === null || String(value).trim() === '') {
+      return false;
+    }
+
+    return /(credential|provider|unlock_method|access_method|authentication\.method)/i.test(key);
+  });
+
+  return discoveredValue?.[1] ? String(discoveredValue[1]).trim() : 'Unknown';
+};
+
 const fetchDoorOpenings = async (timeBracket) => {
   const body = {
     topic: 'door_openings',
@@ -62,7 +110,7 @@ const fetchDoorOpenings = async (timeBracket) => {
       access_point: record['target4.display_name'] || '',
       access_point_id: record['target4.id'] || '',
       status: 'ACCESS', // We are filtering out denied events above
-      method: record['authentication.credential_provider'] || 'Unknown',
+      method: getDoorAccessMethod(record),
       details: record['event.display_message'] || ''
     };
     
