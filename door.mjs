@@ -17,6 +17,7 @@ const doorHeaders = {
 };
 
 // Removed sendDoorEventsToWebhook function as it's now in webhook.mjs
+let doorAccessMetadataPromise;
 
 const getNonEmptyRecordValue = (record, keys) => {
   for (const key of keys) {
@@ -66,6 +67,128 @@ const getDoorAccessMethod = (record) => {
   return discoveredValue?.[1] ? String(discoveredValue[1]).trim() : 'Unknown';
 };
 
+const isNonAccessTargetType = (type) => {
+  if (!type) {
+    return false;
+  }
+
+  return /^(device_config|reason_code|three_button_method)$/i.test(type) || /^UA-G\d/i.test(type);
+};
+
+const flattenDeviceGroups = (data) => {
+  const devices = [];
+
+  for (const item of data || []) {
+    if (Array.isArray(item)) {
+      devices.push(...item);
+      continue;
+    }
+
+    devices.push(item);
+  }
+
+  return devices;
+};
+
+const fetchDoorAccessMetadata = async () => {
+  if (!doorAccessMetadataPromise) {
+    doorAccessMetadataPromise = (async () => {
+      const [doorsResponse, devicesResponse] = await Promise.all([
+        fetch(`${doorEndpoint}/api/v1/developer/doors`, { headers: { ...doorHeaders } }),
+        fetch(`${doorEndpoint}/api/v1/developer/devices`, { headers: { ...doorHeaders } }),
+      ]);
+
+      const doorsResult = await doorsResponse.json();
+      const devicesResult = await devicesResponse.json();
+
+      if (doorsResult.code !== 'SUCCESS' || devicesResult.code !== 'SUCCESS') {
+        throw new Error('Failed to fetch door access metadata');
+      }
+
+      const doors = doorsResult.data || [];
+      const devices = flattenDeviceGroups(devicesResult.data);
+      const doorById = new Map(doors.map((door) => [door.id, door]));
+      const doorLookup = new Map();
+
+      for (const device of devices) {
+        const alias = typeof device.alias === 'string' ? device.alias.trim() : '';
+        const mappedDoor = doorById.get(device.location_id);
+        const name = alias || mappedDoor?.name || device.name || '';
+        const logicalDoorId = mappedDoor?.id || '';
+        const entry = {
+          name,
+          id: logicalDoorId || device.id || '',
+        };
+
+        for (const key of [device.id, device.connected_uah_id, device.location_id]) {
+          if (!key || !name || doorLookup.has(key)) {
+            continue;
+          }
+
+          doorLookup.set(key, entry);
+        }
+      }
+
+      for (const door of doors) {
+        if (!doorLookup.has(door.id)) {
+          doorLookup.set(door.id, { name: door.name || door.full_name || '', id: door.id });
+        }
+      }
+
+      return { doorLookup };
+    })().catch((error) => {
+      doorAccessMetadataPromise = undefined;
+      throw error;
+    });
+  }
+
+  return doorAccessMetadataPromise;
+};
+
+const getDoorAccessPoint = (record, doorLookup) => {
+  const candidates = [
+    {
+      name: getNonEmptyRecordValue(record, ['target5.display_name']),
+      id: getNonEmptyRecordValue(record, ['target5.id']),
+      type: getNonEmptyRecordValue(record, ['target5.type']),
+    },
+    {
+      name: getNonEmptyRecordValue(record, ['target1.display_name']),
+      id: getNonEmptyRecordValue(record, ['target1.id']),
+      type: getNonEmptyRecordValue(record, ['target1.type']),
+    },
+    {
+      name: getNonEmptyRecordValue(record, ['target4.display_name']),
+      id: getNonEmptyRecordValue(record, ['target4.id']),
+      type: getNonEmptyRecordValue(record, ['target4.type']),
+    },
+  ];
+
+  for (const candidate of candidates) {
+    const mappedDoor = candidate.id ? doorLookup.get(candidate.id) : undefined;
+    if (mappedDoor?.name) {
+      return {
+        accessPoint: mappedDoor.name,
+        accessPointId: mappedDoor.id || candidate.id,
+      };
+    }
+  }
+
+  const preferredCandidate = candidates.find((candidate) => candidate.name && !isNonAccessTargetType(candidate.type));
+  if (preferredCandidate) {
+    return {
+      accessPoint: preferredCandidate.name,
+      accessPointId: preferredCandidate.id || '',
+    };
+  }
+
+  const fallbackCandidate = candidates.find((candidate) => candidate.name);
+  return {
+    accessPoint: fallbackCandidate?.name || '',
+    accessPointId: fallbackCandidate?.id || '',
+  };
+};
+
 const fetchDoorOpenings = async (timeBracket) => {
   const body = {
     topic: 'door_openings',
@@ -83,6 +206,7 @@ const fetchDoorOpenings = async (timeBracket) => {
   const text = await result.text();
 
   const data = csv.parse(text, { columns: true });
+  const { doorLookup } = await fetchDoorAccessMetadata();
 
   const openings = {};
   const successfulEvents = [];
@@ -99,6 +223,7 @@ const fetchDoorOpenings = async (timeBracket) => {
     // Format time field for webhook API
     const time = record['time'] || record['event.time'];
     const timestamp = time ? new Date(time).toISOString() : new Date().toISOString();
+    const { accessPoint, accessPointId } = getDoorAccessPoint(record, doorLookup);
 
     const eventData = {
       user_name: record['actor.display_name'],
@@ -107,8 +232,8 @@ const fetchDoorOpenings = async (timeBracket) => {
       timestamp: timestamp,
       site: record['target2.display_name'] || '',
       site_id: record['target2.id'] || '',
-      access_point: record['target4.display_name'] || '',
-      access_point_id: record['target4.id'] || '',
+      access_point: accessPoint,
+      access_point_id: accessPointId,
       status: 'ACCESS', // We are filtering out denied events above
       method: getDoorAccessMethod(record),
       details: record['event.display_message'] || ''
@@ -117,7 +242,7 @@ const fetchDoorOpenings = async (timeBracket) => {
     successfulEvents.push(eventData);
 
     // Filter for only the front door of the space for the slack notifications
-    if (!allowedDoorDevices.includes(record['target4.id'])) {
+    if (!allowedDoorDevices.includes(accessPointId)) {
       continue;
     }
 
