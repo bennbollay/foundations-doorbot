@@ -198,6 +198,9 @@ Add these values to your `.env`:
 CAMERA_API_PORT=8787
 CAMERA_API_PATH=/api/camera-snapshots
 CAMERA_API_KEY=replace-with-your-api-key
+CAMERA_SNAPSHOT_TIMEOUT_MS=10000
+CAMERA_SNAPSHOT_CONCURRENCY=4
+CAMERA_SNAPSHOT_START_INTERVAL_MS=150
 
 # Protect uses the same console as UNIFI_DOOR_API (without the :12445 port)
 # and the same credentials as UNIFI_CLOUD_USERNAME/PASSWORD
@@ -228,7 +231,7 @@ curl -H "x-api-key: replace-with-your-api-key" \
   "http://localhost:8787/api/camera-snapshots?highQuality=false"
 ```
 
-The response is JSON with one entry per camera:
+The response is JSON with success/failure counts for all cameras. The `cameras` array only includes cameras whose snapshot was fetched successfully:
 
 ```json
 {
@@ -247,4 +250,4 @@ The response is JSON with one entry per camera:
 }
 ```
 
-Each camera entry may instead include an `error` field if that particular snapshot request fails.
+If a snapshot request fails, it is counted in `failed` and logged server-side with the camera name, start/end time, duration, byte count, and error.

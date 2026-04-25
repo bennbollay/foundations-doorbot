@@ -1,5 +1,72 @@
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
+const DEFAULT_SNAPSHOT_TIMEOUT_MS = 10000;
+const MIN_SNAPSHOT_TIMEOUT_MS = 5000;
+const DEFAULT_SNAPSHOT_CONCURRENCY = 4;
+const DEFAULT_SNAPSHOT_START_INTERVAL_MS = 150;
+
+function getPositiveIntegerEnv(name, fallback) {
+  const value = Number.parseInt(process.env[name] || '', 10);
+  return Number.isFinite(value) && value > 0 ? value : fallback;
+}
+
+function getSnapshotTimeoutMs() {
+  return Math.max(
+    MIN_SNAPSHOT_TIMEOUT_MS,
+    getPositiveIntegerEnv('CAMERA_SNAPSHOT_TIMEOUT_MS', DEFAULT_SNAPSHOT_TIMEOUT_MS)
+  );
+}
+
+function getSnapshotConcurrency() {
+  return getPositiveIntegerEnv('CAMERA_SNAPSHOT_CONCURRENCY', DEFAULT_SNAPSHOT_CONCURRENCY);
+}
+
+function getSnapshotStartIntervalMs() {
+  return getPositiveIntegerEnv('CAMERA_SNAPSHOT_START_INTERVAL_MS', DEFAULT_SNAPSHOT_START_INTERVAL_MS);
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function createStartGate(intervalMs) {
+  let nextStartAt = 0;
+
+  return async () => {
+    const now = Date.now();
+    const waitMs = Math.max(0, nextStartAt - now);
+    nextStartAt = Math.max(now, nextStartAt) + intervalMs;
+
+    if (waitMs > 0) {
+      await sleep(waitMs);
+    }
+  };
+}
+
+async function mapWithConcurrency(items, concurrency, startIntervalMs, mapper) {
+  const results = new Array(items.length);
+  let nextIndex = 0;
+  const concurrencyLimit = Math.max(1, concurrency);
+  const waitForTurn = createStartGate(startIntervalMs);
+
+  async function worker() {
+    while (nextIndex < items.length) {
+      const currentIndex = nextIndex;
+      nextIndex += 1;
+      await waitForTurn();
+      results[currentIndex] = await mapper(items[currentIndex], currentIndex);
+    }
+  }
+
+  const workerCount = Math.min(concurrencyLimit, items.length);
+  await Promise.all(Array.from({ length: workerCount }, () => worker()));
+  return results;
+}
+
+function formatLogTime(timestampMs) {
+  return new Date(timestampMs).toISOString();
+}
+
 function getConfig() {
   const host = process.env.UNIFI_PROTECT_HOST;
   const token = process.env.UNIFI_PROTECT_API_TOKEN;
@@ -139,59 +206,95 @@ export async function listProtectCameras() {
   return { session, cameras };
 }
 
-export async function fetchCameraSnapshot(session, camera, { highQuality = true } = {}) {
+export async function fetchCameraSnapshot(session, camera, { highQuality = true, timeoutMs = getSnapshotTimeoutMs() } = {}) {
   const query = new URLSearchParams({ ts: String(Date.now()) });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+  const startedAt = Date.now();
+  let byteCount = 0;
+  let errorMessage = '';
 
-  const response = await fetch(
-    `${session.baseUrl}${session.snapshotPathPrefix}/${camera.id}/snapshot?${query}`,
-    {
-      headers: {
-        ...session.headers,
-        Accept: 'image/jpeg',
-      },
-    }
+  console.log(
+    `[camera-snapshot] start camera="${camera.name}" id=${camera.id} timestamp=${formatLogTime(startedAt)} timeoutMs=${timeoutMs}`
   );
 
-  if (!response.ok) {
-    const text = await response.text();
-    throw new Error(`Snapshot failed for ${camera.name} (${response.status}): ${text.substring(0, 200)}`);
+  try {
+    const response = await fetch(
+      `${session.baseUrl}${session.snapshotPathPrefix}/${camera.id}/snapshot?${query}`,
+      {
+        headers: {
+          ...session.headers,
+          Accept: 'image/jpeg',
+        },
+        signal: controller.signal,
+      }
+    );
+
+    if (!response.ok) {
+      const text = await response.text();
+      byteCount = Buffer.byteLength(text);
+      throw new Error(`Snapshot failed for ${camera.name} (${response.status}): ${text.substring(0, 200)}`);
+    }
+
+    const contentType = response.headers.get('content-type') || 'image/jpeg';
+    const imageBuffer = Buffer.from(await response.arrayBuffer());
+    byteCount = imageBuffer.length;
+
+    return {
+      ...camera,
+      contentType,
+      snapshotBase64: imageBuffer.toString('base64'),
+    };
+  } catch (error) {
+    errorMessage =
+      error.name === 'AbortError' ? `Snapshot timed out after ${timeoutMs}ms for ${camera.name}` : error.message;
+    throw new Error(errorMessage);
+  } finally {
+    clearTimeout(timeout);
+    const endedAt = Date.now();
+    const durationMs = endedAt - startedAt;
+    console.log(
+      `[camera-snapshot] end camera="${camera.name}" id=${camera.id} timestamp=${formatLogTime(endedAt)} durationMs=${durationMs} bytes=${byteCount} error=${JSON.stringify(errorMessage || null)}`
+    );
   }
-
-  const contentType = response.headers.get('content-type') || 'image/jpeg';
-  const imageBuffer = Buffer.from(await response.arrayBuffer());
-
-  return {
-    ...camera,
-    contentType,
-    snapshotBase64: imageBuffer.toString('base64'),
-  };
 }
 
 export async function fetchAllCameraSnapshots(options = {}) {
   const highQuality = options.highQuality ?? true;
+  const timeoutMs = options.timeoutMs ?? getSnapshotTimeoutMs();
+  const concurrency = options.concurrency ?? getSnapshotConcurrency();
+  const startIntervalMs = options.startIntervalMs ?? getSnapshotStartIntervalMs();
   const { session, cameras } = await listProtectCameras();
 
-  const results = await Promise.all(
-    cameras.map(async (camera) => {
+  console.log(
+    `[camera-snapshot] fetching ${cameras.length} cameras concurrency=${concurrency} timeoutMs=${timeoutMs} startIntervalMs=${startIntervalMs}`
+  );
+
+  const results = await mapWithConcurrency(
+    cameras,
+    concurrency,
+    startIntervalMs,
+    async (camera) => {
       try {
-        return await fetchCameraSnapshot(session, camera, { highQuality });
+        return await fetchCameraSnapshot(session, camera, { highQuality, timeoutMs });
       } catch (error) {
         return {
           ...camera,
           error: error.message,
         };
       }
-    })
+    }
   );
 
   const succeeded = results.filter((c) => !c.error).length;
   const failed = results.length - succeeded;
+  const successfulSnapshots = results.filter((c) => !c.error);
 
   return {
     generatedAt: new Date().toISOString(),
     totalCameras: cameras.length,
     succeeded,
     failed,
-    cameras: results,
+    cameras: successfulSnapshots,
   };
 }
