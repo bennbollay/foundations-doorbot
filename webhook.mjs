@@ -18,7 +18,7 @@ const doorWebhookApiKey = process.env.DOOR_ACCESS_WEBHOOK_API_KEY;
  * @param {Array} newMembers - Array of new member objects with firstName, lastName, email
  * @returns {Object} Results of member creation
  */
-const processNewMembers = async (newMembers) => {
+export const processNewMembers = async (newMembers) => {
   const results = {
     created: [],
     alreadyExists: [],
@@ -67,7 +67,7 @@ const processNewMembers = async (newMembers) => {
  * @param {Object} managedAccess - Object with activate and deactivate arrays of emails
  * @returns {Object} Results of access management
  */
-const processManagedAccess = async (managedAccess) => {
+export const processManagedAccess = async (managedAccess) => {
   const results = {
     activated: [],
     deactivated: [],
@@ -152,7 +152,7 @@ const processManagedAccess = async (managedAccess) => {
  * @param {Array} newInvites - Array of email addresses to resend invitations to
  * @returns {Object} Results of invitation resending
  */
-const processInviteResends = async (newInvites) => {
+export const processInviteResends = async (newInvites) => {
   const results = {
     sent: [],
     failed: [],

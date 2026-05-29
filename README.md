@@ -251,3 +251,55 @@ The response is JSON with success/failure counts for all cameras. The `cameras` 
 ```
 
 If a snapshot request fails, it is counted in `failed` and logged server-side with the camera name, start/end time, duration, byte count, and error.
+
+## Member Management API
+
+In addition to acting on the response from `DOOR_ACCESS_WEBHOOK_ENDPOINT`, the same Camera Snapshot API server also exposes endpoints to create, deactivate, activate, and look up members directly. These routes run on the **same port and use the same `CAMERA_API_KEY`** as the camera endpoints, and they reuse the exact same UniFi processing path the webhook uses (`processNewMembers` / `processManagedAccess`), so behavior (including idempotency checks) is identical.
+
+No extra configuration is required beyond what the Camera Snapshot API already needs. Member operations use the UniFi Identity credentials already configured for the CLI (`UNIFI_CLOUD_USERNAME` / `UNIFI_CLOUD_PASSWORD`). Start the server the same way:
+
+```bash
+npm run camera-api
+```
+
+### Authentication
+
+Every endpoint except `/health` requires the API key (`CAMERA_API_KEY`), sent either as `x-api-key: <key>` or `Authorization: Bearer <key>`.
+
+### Endpoints
+
+| Method | Path | Body / Query | Description |
+|--------|------|--------------|-------------|
+| `POST` | `/api/members` | `{ "firstName", "lastName", "email" }` or `{ "newMembers": [...] }` | Create one or more members. |
+| `POST` | `/api/members/deactivate` | `{ "email" }` or `{ "emails": [...] }` | Deactivate door access. |
+| `POST` | `/api/members/activate` | `{ "email" }` or `{ "emails": [...] }` | Activate door access. |
+| `GET`  | `/api/members/status` | `?email=...` | Look up a member's status. |
+
+### Examples
+
+Create a member:
+
+```bash
+curl -H "x-api-key: replace-with-your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{"firstName":"John","lastName":"Doe","email":"john.doe@example.com"}' \
+  "http://localhost:8787/api/members"
+```
+
+Deactivate a member:
+
+```bash
+curl -H "x-api-key: replace-with-your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{"email":"john.doe@example.com"}' \
+  "http://localhost:8787/api/members/deactivate"
+```
+
+Check a member's status:
+
+```bash
+curl -H "x-api-key: replace-with-your-api-key" \
+  "http://localhost:8787/api/members/status?email=john.doe@example.com"
+```
+
+Responses mirror the webhook processing results. Creation returns `201` when a new member is created (and `200` if the member already existed); activate/deactivate return `200` on success and `502` if any operation failed, with per-email breakdowns (`created`, `alreadyExists`, `activated`, `deactivated`, `alreadyActive`, `alreadyInactive`, `failed`).
