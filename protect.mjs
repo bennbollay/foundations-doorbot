@@ -102,6 +102,9 @@ async function getProtectSession() {
       },
       cameraListPath: '/proxy/protect/integration/v1/cameras',
       snapshotPathPrefix: '/proxy/protect/integration/v1/cameras',
+      // The integration API strictly validates query params (AJV) and rejects
+      // unknown ones like a `ts` cache-buster; only `highQuality` is allowed.
+      isIntegrationApi: true,
     };
   }
 
@@ -169,6 +172,7 @@ async function getProtectSession() {
     headers,
     cameraListPath: '/proxy/protect/api/bootstrap',
     snapshotPathPrefix: '/proxy/protect/api/cameras',
+    isIntegrationApi: false,
   };
 }
 
@@ -207,7 +211,9 @@ export async function listProtectCameras() {
 }
 
 export async function fetchCameraSnapshot(session, camera, { highQuality = true, timeoutMs = getSnapshotTimeoutMs() } = {}) {
-  const query = new URLSearchParams({ ts: String(Date.now()) });
+  const query = session.isIntegrationApi
+    ? new URLSearchParams({ highQuality: String(highQuality) })
+    : new URLSearchParams({ ts: String(Date.now()) });
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
   const startedAt = Date.now();
@@ -218,17 +224,37 @@ export async function fetchCameraSnapshot(session, camera, { highQuality = true,
     `[camera-snapshot] start camera="${camera.name}" id=${camera.id} timestamp=${formatLogTime(startedAt)} timeoutMs=${timeoutMs}`
   );
 
+  const requestSnapshot = (params) =>
+    fetch(`${session.baseUrl}${session.snapshotPathPrefix}/${camera.id}/snapshot?${params}`, {
+      headers: {
+        ...session.headers,
+        Accept: 'image/jpeg',
+      },
+      signal: controller.signal,
+    });
+
   try {
-    const response = await fetch(
-      `${session.baseUrl}${session.snapshotPathPrefix}/${camera.id}/snapshot?${query}`,
-      {
-        headers: {
-          ...session.headers,
-          Accept: 'image/jpeg',
-        },
-        signal: controller.signal,
+    let params = query;
+    let response;
+
+    for (let attempt = 0; attempt < 4; attempt += 1) {
+      response = await requestSnapshot(params);
+      if (response.ok) break;
+
+      // Older camera models reject highQuality=true with a 400; retry at standard quality.
+      if (session.isIntegrationApi && response.status === 400 && params.get('highQuality') === 'true') {
+        params = new URLSearchParams({ highQuality: 'false' });
+        continue;
       }
-    );
+
+      // The NVR rate-limits snapshot requests (10/sec); back off and retry.
+      if (response.status === 429) {
+        await sleep(1000);
+        continue;
+      }
+
+      break;
+    }
 
     if (!response.ok) {
       const text = await response.text();
@@ -286,15 +312,17 @@ export async function fetchAllCameraSnapshots(options = {}) {
     }
   );
 
-  const succeeded = results.filter((c) => !c.error).length;
-  const failed = results.length - succeeded;
   const successfulSnapshots = results.filter((c) => !c.error);
+  const failures = results
+    .filter((c) => c.error)
+    .map(({ id, name, isConnected, error }) => ({ id, name, isConnected, error }));
 
   return {
     generatedAt: new Date().toISOString(),
     totalCameras: cameras.length,
-    succeeded,
-    failed,
+    succeeded: successfulSnapshots.length,
+    failed: failures.length,
     cameras: successfulSnapshots,
+    failures,
   };
 }
