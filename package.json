@@ -10,6 +10,7 @@
     "deactivate": "node cli.mjs deactivate",
     "status": "node cli.mjs status",
     "refresh-auth": "node refresh-auth.mjs",
+    "add-foundations-group": "node add-foundations-group.mjs",
     "camera-api": "node camera-api-server.mjs",
     "camera-api:install": "bash install-camera-api.sh",
     "camera-api:uninstall": "launchctl unload ~/Library/LaunchAgents/com.foundations.camera-api.plist 2>/dev/null; rm -f ~/Library/LaunchAgents/com.foundations.camera-api.plist && echo 'Uninstalled com.foundations.camera-api'",

@@ -241,7 +241,7 @@ const fetchDoorOpenings = async (timeBracket) => {
     
     successfulEvents.push(eventData);
 
-    // Filter for only the front door of the space for the slack notifications
+    // Filter for only the Building Door of the space for the slack notifications
     if (!allowedDoorDevices.includes(accessPointId)) {
       continue;
     }

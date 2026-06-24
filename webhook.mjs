@@ -8,6 +8,11 @@ import {
   getUserStatus,
   resendInvitation 
 } from './access.mjs';
+import {
+  resolveFoundationsGroupId,
+  addUserToFoundations,
+  FOUNDATIONS_GROUP_NAME,
+} from './groups.mjs';
 
 // Door access webhook API endpoint and API key
 const doorWebhookEndpoint = process.env.DOOR_ACCESS_WEBHOOK_ENDPOINT;
@@ -25,6 +30,31 @@ export const processNewMembers = async (newMembers) => {
     failed: []
   };
 
+  // Resolve the Foundations group id once per batch. Every member AND employee
+  // we provision must end up in this group, whether they're newly created or
+  // already existed in UniFi. Best-effort: if resolution fails we still create
+  // users (createUser also tries to assign the group at creation time).
+  let foundationsGroupId = null;
+  try {
+    foundationsGroupId = await resolveFoundationsGroupId();
+  } catch (e) {
+    console.error(`⚠️  Could not resolve "${FOUNDATIONS_GROUP_NAME}" group; will create users without forcing group membership: ${e.message}`);
+  }
+
+  // Idempotently ensure a user is in the Foundations group. Safe to call for
+  // both newly-created and pre-existing users (no-op if already a member).
+  const ensureFoundationsGroup = async (userId, email) => {
+    if (!foundationsGroupId || !userId) return;
+    try {
+      const added = await addUserToFoundations(userId, foundationsGroupId);
+      if (added) {
+        console.log(`   Added ${email} to "${FOUNDATIONS_GROUP_NAME}" group`);
+      }
+    } catch (e) {
+      console.error(`   ⚠️  Failed to add ${email} to "${FOUNDATIONS_GROUP_NAME}" group: ${e.message}`);
+    }
+  };
+
   for (const member of newMembers) {
     try {
       // Check if user already exists by email
@@ -32,20 +62,26 @@ export const processNewMembers = async (newMembers) => {
       
       if (existingUser) {
         console.log(`User already exists: ${member.email}`);
+        // Existing users may predate group assignment (or were created via
+        // another flow), so always reconcile their group membership here.
+        await ensureFoundationsGroup(existingUser.id, member.email);
         results.alreadyExists.push({
           email: member.email,
           userId: existingUser.id,
           message: 'User already exists'
         });
       } else {
-        // Create new user
+        // Create new user (createUser also assigns the Foundations group on
+        // creation; we reconcile again below as defense in depth).
         console.log(`Creating new user: ${member.firstName} ${member.lastName} (${member.email})`);
         const newUser = await createUser(member.firstName, member.lastName, member.email);
+        const createdId = newUser?.user?.id || newUser?.id;
+        await ensureFoundationsGroup(createdId, member.email);
         results.created.push({
           email: member.email,
           firstName: member.firstName,
           lastName: member.lastName,
-          userId: newUser?.id,
+          userId: createdId,
           message: 'User created successfully'
         });
       }

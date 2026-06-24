@@ -11,3 +11,4 @@ test-login.mjs
 *.json
 camera-api.log
 camera-api.err.log
+network-diag/

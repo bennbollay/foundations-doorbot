@@ -5,6 +5,7 @@ process.loadEnvFile();
 
 import fs from 'fs';
 import { execSync } from 'child_process';
+import { resolveFoundationsGroupId, FOUNDATIONS_GROUP_NAME } from './groups.mjs';
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
@@ -321,11 +322,21 @@ export async function createUser(firstName, lastName, email) {
     headers['X-Csrf-Token'] = auth.csrf;
   }
 
+  // Every new user must belong to the Foundations group. Resolve its id so it can be
+  // assigned at creation time; if resolution fails, fall back to creating without it
+  // rather than blocking user creation entirely.
+  let groupIds = [];
+  try {
+    groupIds = [await resolveFoundationsGroupId()];
+  } catch (e) {
+    console.error(`⚠️  Could not resolve "${FOUNDATIONS_GROUP_NAME}" group, creating user without it: ${e.message}`);
+  }
+
   // Payload matching browser capture
   const payload = {
     first_name: firstName,
     last_name: lastName,
-    group_ids: [],
+    group_ids: groupIds,
     nfc_token: "",
     force_add_nfc: true,
     employee_number: "",
@@ -347,6 +358,10 @@ export async function createUser(firstName, lastName, email) {
       if (result.code === 1 || result.codeS === 'SUCCESS') {
         const newUser = result.data;
         console.log(`✅ Successfully created user: ${newUser.full_name} (ID: ${newUser.unique_id})`);
+        if (groupIds.length > 0) {
+          console.log(`   Assigned to "${FOUNDATIONS_GROUP_NAME}" group`);
+        }
+
         return {
           success: true,
           user: {

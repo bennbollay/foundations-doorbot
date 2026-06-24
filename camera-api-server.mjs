@@ -76,16 +76,24 @@ const handleCameraSnapshots = async (res) => {
 // Create one or more members. Accepts either a single { firstName, lastName, email }
 // object or a batch via { newMembers: [...] }, mirroring the webhook contract.
 const handleCreateMember = async (res, body) => {
-  const members = Array.isArray(body?.newMembers) ? body.newMembers : [body];
+  const rawMembers = Array.isArray(body?.newMembers) ? body.newMembers : [body];
 
-  const invalid = members.find(
-    (m) => !m || !m.firstName || !m.lastName || !m.email
-  );
-  if (members.length === 0 || invalid) {
+  // Only email is required. firstName/lastName are optional (single-word names,
+  // company employees without a surname, etc.) — createUser handles empty name
+  // parts, and every created/existing user is reconciled into the Foundations
+  // group regardless. Normalize so downstream always sees string name fields.
+  const invalid = rawMembers.find((m) => !m || !m.email);
+  if (rawMembers.length === 0 || invalid) {
     return sendJson(res, 400, {
-      error: 'Each member requires firstName, lastName, and email',
+      error: 'Each member requires an email',
     });
   }
+
+  const members = rawMembers.map((m) => ({
+    ...m,
+    firstName: m.firstName || '',
+    lastName: m.lastName || '',
+  }));
 
   const result = await processNewMembers(members);
 
@@ -177,7 +185,7 @@ server.on('error', (error) => {
 server.listen(PORT, () => {
   console.log(`Camera + member API listening on http://localhost:${PORT}`);
   console.log(`  GET  /api/camera-snapshots`);
-  console.log(`  POST /api/members              { firstName, lastName, email }`);
+  console.log(`  POST /api/members              { email, firstName?, lastName? }`);
   console.log(`  POST /api/members/deactivate   { email }`);
   console.log(`  POST /api/members/activate     { email }`);
   console.log(`  GET  /api/members/status?email=...`);
