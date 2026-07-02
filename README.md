@@ -303,3 +303,83 @@ curl -H "x-api-key: replace-with-your-api-key" \
 ```
 
 Responses mirror the webhook processing results. Creation returns `201` when a new member is created (and `200` if the member already existed); activate/deactivate return `200` on success and `502` if any operation failed, with per-email breakdowns (`created`, `alreadyExists`, `activated`, `deactivated`, `alreadyActive`, `alreadyInactive`, `failed`).
+
+## Visitor Pass API
+
+For public events, the same API server can issue **visitor passes**: temporary door access with a PIN code that only works during a specified time window. Passes are backed by UniFi Access visitors (via the official developer API), so UniFi enforces the time window itself — no cleanup job is needed and the PIN simply stops working when the window ends.
+
+Visitor passes are intentionally **never assigned to any door group**, so they only receive UniFi's default visitor access — the front door.
+
+### Requirements
+
+The `UNIFI_DOOR_TOKEN` used for door logs also needs these permissions in the UniFi console:
+
+- `edit:visitor` (create/delete visitors, assign PINs)
+- `view:visitor` (list/fetch visitors)
+- `view:credential` (generate PIN codes)
+
+### Endpoints
+
+All endpoints require the same `CAMERA_API_KEY` auth as above.
+
+| Method | Path | Body / Query | Description |
+|--------|------|--------------|-------------|
+| `POST` | `/api/visitor-passes` | `{ "firstName", "startTime", "endTime", ... }` | Create a pass; returns the PIN. |
+| `GET`  | `/api/visitor-passes` | `?keyword=&page_num=&page_size=` | List passes. |
+| `GET`  | `/api/visitor-passes/:id` | | Fetch a single pass. |
+| `DELETE` | `/api/visitor-passes/:id` | `?force=true` to hard-delete | Revoke a pass (cancels the visit). |
+
+Create body fields:
+
+- `firstName` (required) — e.g. the event name: `"Open House Guest"`
+- `startTime` / `endTime` (required) — epoch seconds, epoch milliseconds, or ISO 8601 strings
+- `lastName`, `email`, `mobilePhone`, `visitorCompany`, `remarks` (optional)
+- `pinCode` (optional) — explicit PIN; if omitted, UniFi generates one
+
+### Examples
+
+Create a pass for an event (4pm–8pm):
+
+```bash
+curl -H "x-api-key: replace-with-your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "firstName": "Summer Mixer Guest",
+    "remarks": "July community mixer",
+    "startTime": "2026-07-10T16:00:00-07:00",
+    "endTime": "2026-07-10T20:00:00-07:00"
+  }' \
+  "http://localhost:8787/api/visitor-passes"
+```
+
+Response (`201`):
+
+```json
+{
+  "id": "fbe8d920-47d3-4cfd-bda7-bf4b0e26f73c",
+  "firstName": "Summer Mixer Guest",
+  "lastName": "",
+  "pinCode": "67203419",
+  "startTime": 1783810800,
+  "endTime": 1783825200,
+  "status": "UPCOMING",
+  "remarks": "July community mixer"
+}
+```
+
+**Important:** the plaintext `pinCode` is only returned at creation time — UniFi stores only a hash, so capture it from this response to share with attendees.
+
+Revoke a pass early:
+
+```bash
+curl -X DELETE -H "x-api-key: replace-with-your-api-key" \
+  "http://localhost:8787/api/visitor-passes/fbe8d920-47d3-4cfd-bda7-bf4b0e26f73c"
+```
+
+### Testing
+
+Run the visitor pass test suite against a mock UniFi server (no hardware needed):
+
+```bash
+node test-visitor-passes.mjs
+```

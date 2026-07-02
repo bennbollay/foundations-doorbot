@@ -4,6 +4,13 @@ import http from 'http';
 import { fetchAllCameraSnapshots } from './protect.mjs';
 import { processNewMembers, processManagedAccess } from './webhook.mjs';
 import { getUserStatus } from './access.mjs';
+import {
+  createVisitorPass,
+  fetchVisitor,
+  fetchAllVisitors,
+  deleteVisitor,
+  toEpochSeconds,
+} from './visitors.mjs';
 
 const PORT = Number(process.env.CAMERA_API_PORT || '8787');
 const API_KEY = process.env.CAMERA_API_KEY;
@@ -137,6 +144,92 @@ const handleMemberStatus = async (res, email) => {
   return sendJson(res, 200, status);
 };
 
+// Create a time-windowed visitor pass with a PIN, for public events.
+// Body: { firstName, lastName?, startTime, endTime, email?, remarks?,
+//         mobilePhone?, visitorCompany?, pinCode? }
+// startTime/endTime accept epoch seconds, epoch ms, or ISO 8601 strings.
+// Passes are never assigned door groups, so they only open the front door.
+const handleCreateVisitorPass = async (res, body) => {
+  if (!body?.firstName) {
+    return sendJson(res, 400, { error: 'firstName is required' });
+  }
+
+  const startTime = toEpochSeconds(body.startTime);
+  const endTime = toEpochSeconds(body.endTime);
+
+  if (startTime === undefined || endTime === undefined) {
+    return sendJson(res, 400, {
+      error: 'startTime and endTime are required (epoch seconds, epoch ms, or ISO 8601)',
+    });
+  }
+
+  if (endTime <= startTime) {
+    return sendJson(res, 400, { error: 'endTime must be after startTime' });
+  }
+
+  const pass = await createVisitorPass({
+    firstName: body.firstName,
+    lastName: body.lastName || '',
+    startTime,
+    endTime,
+    email: body.email || '',
+    mobilePhone: body.mobilePhone || '',
+    remarks: body.remarks || '',
+    visitorCompany: body.visitorCompany || '',
+    pinCode: body.pinCode,
+  });
+
+  // The plaintext PIN is only available here — UniFi stores a hash.
+  return sendJson(res, 201, {
+    id: pass.id,
+    firstName: pass.first_name,
+    lastName: pass.last_name,
+    pinCode: pass.pinCode,
+    startTime,
+    endTime,
+    status: pass.status,
+    remarks: body.remarks || '',
+  });
+};
+
+const handleListVisitorPasses = async (res, searchParams) => {
+  const visitors = await fetchAllVisitors({
+    keyword: searchParams.get('keyword') || undefined,
+    pageNum: searchParams.get('page_num') || undefined,
+    pageSize: searchParams.get('page_size') || undefined,
+  });
+  return sendJson(res, 200, visitors);
+};
+
+const handleGetVisitorPass = async (res, visitorId) => {
+  try {
+    const visitor = await fetchVisitor(visitorId);
+    return sendJson(res, 200, visitor);
+  } catch (error) {
+    if (/CODE_NOT_EXISTS|CODE_RESOURCE_NOT_FOUND/.test(error.message)) {
+      return sendJson(res, 404, { error: 'Visitor pass not found', id: visitorId });
+    }
+    throw error;
+  }
+};
+
+// Revoke a pass. Default cancels the visit (record kept, access revoked);
+// ?force=true physically deletes the visitor from UniFi.
+const handleDeleteVisitorPass = async (res, visitorId, searchParams) => {
+  const force = searchParams.get('force') === 'true';
+  try {
+    await deleteVisitor(visitorId, { force });
+    return sendJson(res, 200, { id: visitorId, revoked: true, deleted: force });
+  } catch (error) {
+    if (/CODE_NOT_EXISTS|CODE_RESOURCE_NOT_FOUND/.test(error.message)) {
+      return sendJson(res, 404, { error: 'Visitor pass not found', id: visitorId });
+    }
+    throw error;
+  }
+};
+
+const VISITOR_PASS_PATH = /^\/api\/visitor-passes\/([^/]+)$/;
+
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url || '/', `http://${req.headers.host || 'localhost'}`);
 
@@ -169,6 +262,25 @@ const server = http.createServer(async (req, res) => {
       return await handleMemberStatus(res, url.searchParams.get('email'));
     }
 
+    if (req.method === 'POST' && url.pathname === '/api/visitor-passes') {
+      return await handleCreateVisitorPass(res, await readJsonBody(req));
+    }
+
+    if (req.method === 'GET' && url.pathname === '/api/visitor-passes') {
+      return await handleListVisitorPasses(res, url.searchParams);
+    }
+
+    const visitorPassMatch = url.pathname.match(VISITOR_PASS_PATH);
+    if (visitorPassMatch) {
+      const visitorId = decodeURIComponent(visitorPassMatch[1]);
+      if (req.method === 'GET') {
+        return await handleGetVisitorPass(res, visitorId);
+      }
+      if (req.method === 'DELETE') {
+        return await handleDeleteVisitorPass(res, visitorId, url.searchParams);
+      }
+    }
+
     return sendJson(res, 404, { error: 'Not found' });
   } catch (error) {
     console.error(`Failed to handle ${req.method} ${url.pathname}:`, error);
@@ -189,6 +301,10 @@ server.listen(PORT, () => {
   console.log(`  POST /api/members/deactivate   { email }`);
   console.log(`  POST /api/members/activate     { email }`);
   console.log(`  GET  /api/members/status?email=...`);
+  console.log(`  POST   /api/visitor-passes         { firstName, startTime, endTime, ... }`);
+  console.log(`  GET    /api/visitor-passes`);
+  console.log(`  GET    /api/visitor-passes/:id`);
+  console.log(`  DELETE /api/visitor-passes/:id     (?force=true to hard-delete)`);
   console.log(`Protect host: ${process.env.UNIFI_PROTECT_HOST}`);
   console.log(`Auth mode: ${process.env.UNIFI_PROTECT_API_TOKEN ? 'API token' : 'username/password'}`);
 });
