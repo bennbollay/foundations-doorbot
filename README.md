@@ -308,7 +308,7 @@ Responses mirror the webhook processing results. Creation returns `201` when a n
 
 For public events, the same API server can issue **visitor passes**: temporary door access with a PIN code that only works during a specified time window. Passes are backed by UniFi Access visitors (via the official developer API), so UniFi enforces the time window itself — no cleanup job is needed and the PIN simply stops working when the window ends.
 
-Visitor passes are intentionally **never assigned to any door group**, so they only receive UniFi's default visitor access — the front door.
+Visitor passes are assigned the **All Locations** door group (UniFi's built-in building-type group covering every door). This is required: creating a visitor without explicit resources leaves it on a "custom" location assignment that includes no doors, so the PIN would never work.
 
 ### Requirements
 
@@ -317,6 +317,7 @@ The `UNIFI_DOOR_TOKEN` used for door logs also needs these permissions in the Un
 - `edit:visitor` (create/delete visitors, assign PINs)
 - `view:visitor` (list/fetch visitors)
 - `view:credential` (generate PIN codes)
+- `view:space` (fetch the door group topology to resolve All Locations)
 
 ### Endpoints
 

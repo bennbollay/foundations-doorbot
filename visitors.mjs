@@ -9,10 +9,13 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 // (start_time/end_time, epoch seconds) and an assigned PIN code. Outside the
 // window the PIN simply stops working, so no cleanup job is needed. This is
 // the same API host/token used for door logs (UNIFI_DOOR_API/UNIFI_DOOR_TOKEN),
-// but the token additionally needs edit:visitor and view:credential permissions.
+// but the token additionally needs edit:visitor, view:credential, and
+// view:space permissions.
 //
-// Visitors are deliberately NOT assigned to any door group or resources, so
-// they only get UniFi's default visitor access (the front door).
+// Visitors are assigned the "All Locations" door group (UniFi's special
+// building-type group covering every door). Creating a visitor without any
+// resources leaves them on a "custom" assignment with zero doors, so the PIN
+// would never open anything.
 
 const doorEndpoint = process.env.UNIFI_DOOR_API;
 const doorAuthToken = process.env.UNIFI_DOOR_TOKEN;
@@ -62,6 +65,34 @@ export const toEpochSeconds = (value) => {
   }
 
   return undefined;
+};
+
+// Fetches the door group topology. Building-type entries are UniFi's special
+// "all doors in this location" groups; access-type entries are custom groups.
+export const fetchDoorGroupTopology = () =>
+  accessRequest('/api/v1/developer/door_groups/topology');
+
+// Resolves the door group resources representing "All Locations": every
+// building-type group in the topology. Cached for the process lifetime since
+// the topology only changes when doors/locations are reconfigured in UniFi.
+let allLocationsResourcesPromise;
+export const resolveAllLocationsResources = () => {
+  allLocationsResourcesPromise ??= (async () => {
+    const topology = await fetchDoorGroupTopology();
+    const buildings = (topology || []).filter((group) => group.type === 'building');
+    if (buildings.length === 0) {
+      throw new Error('No building-type door group found in UniFi Access topology; cannot grant All Locations access.');
+    }
+    return buildings.map((group) => ({ id: group.id, type: 'door_group' }));
+  })();
+
+  // Drop the cache on failure so the next call retries instead of replaying
+  // the same rejection forever.
+  allLocationsResourcesPromise.catch(() => {
+    allLocationsResourcesPromise = undefined;
+  });
+
+  return allLocationsResourcesPromise;
 };
 
 // Generates a PIN code server-side so it satisfies UniFi's PIN constraints.
@@ -121,7 +152,10 @@ export const createVisitorPass = async ({
   visitorCompany = '',
   pinCode,
 }) => {
-  // No resources/door groups on purpose: default visitor access = front door.
+  // Without explicit resources UniFi creates the visitor with a "custom"
+  // location assignment containing no doors, so grant All Locations.
+  const resources = await resolveAllLocationsResources();
+
   const payload = {
     first_name: firstName,
     last_name: lastName,
@@ -132,6 +166,7 @@ export const createVisitorPass = async ({
     start_time: startTime,
     end_time: endTime,
     visit_reason: 'Others',
+    resources,
   };
 
   const visitor = await accessRequest('/api/v1/developer/visitors', {

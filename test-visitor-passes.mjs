@@ -19,6 +19,7 @@ process.env.UNIFI_DOOR_TOKEN = 'test-token';
 const visitors = new Map();
 let nextVisitorId = 1;
 let pinAssignmentShouldFail = false;
+let topologyRequestCount = 0;
 
 const readBody = (req) =>
   new Promise((resolve) => {
@@ -40,6 +41,28 @@ const mockServer = http.createServer(async (req, res) => {
 
   if (req.method === 'POST' && url.pathname === '/api/v1/developer/credentials/pin_codes') {
     return send({ code: 'SUCCESS', data: '67203419', msg: 'success' });
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/v1/developer/door_groups/topology') {
+    topologyRequestCount++;
+    return send({
+      code: 'SUCCESS',
+      data: [
+        {
+          id: 'building-group-1',
+          name: 'All Locations',
+          type: 'building',
+          resource_topologies: [],
+        },
+        {
+          id: 'custom-group-1',
+          name: 'customized group',
+          type: 'access',
+          resource_topologies: [],
+        },
+      ],
+      msg: 'success',
+    });
   }
 
   if (req.method === 'POST' && url.pathname === '/api/v1/developer/visitors') {
@@ -130,7 +153,11 @@ const runTests = async () => {
   check('pass returns generated plaintext PIN', pass.pinCode === '67203419');
   check('mock recorded the PIN assignment', visitors.get(pass.id)?.pin_code?.token === 'hash-of-67203419');
   check('window stored as epoch seconds', visitors.get(pass.id)?.start_time === start && visitors.get(pass.id)?.end_time === end);
-  check('no door groups/resources requested', visitors.get(pass.id)?.requested_resources === undefined);
+  check(
+    'All Locations door group requested',
+    JSON.stringify(visitors.get(pass.id)?.requested_resources) ===
+      JSON.stringify([{ id: 'building-group-1', type: 'door_group' }])
+  );
 
   console.log('\n=== Create pass with explicit PIN ===');
   const pass2 = await createVisitorPass({
@@ -142,6 +169,12 @@ const runTests = async () => {
   });
   check('explicit PIN is used', pass2.pinCode === '12345678');
   check('mock recorded explicit PIN', visitors.get(pass2.id)?.pin_code?.token === 'hash-of-12345678');
+  check(
+    'second pass also gets All Locations',
+    JSON.stringify(visitors.get(pass2.id)?.requested_resources) ===
+      JSON.stringify([{ id: 'building-group-1', type: 'door_group' }])
+  );
+  check('topology is cached across passes', topologyRequestCount === 1);
 
   console.log('\n=== Fetch and list ===');
   const fetched = await fetchVisitor(pass.id);

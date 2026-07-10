@@ -148,7 +148,8 @@ const handleMemberStatus = async (res, email) => {
 // Body: { firstName, lastName?, startTime, endTime, email?, remarks?,
 //         mobilePhone?, visitorCompany?, pinCode? }
 // startTime/endTime accept epoch seconds, epoch ms, or ISO 8601 strings.
-// Passes are never assigned door groups, so they only open the front door.
+// Passes are assigned the All Locations door group; without it UniFi leaves
+// visitors on a "custom" assignment with no door access at all.
 const handleCreateVisitorPass = async (res, body) => {
   if (!body?.firstName) {
     return sendJson(res, 400, { error: 'firstName is required' });
