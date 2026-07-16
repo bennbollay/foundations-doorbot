@@ -8,7 +8,8 @@ import {
   deactivateUserByEmail,
   getUserStatus as getUserStatusByEmail,
   createUser as createUserDirect,
-  resendInvitation as resendInvitationDirect
+  resendInvitation as resendInvitationDirect,
+  updateUserEmail as updateUserEmailDirect
 } from './direct_identity.mjs';
 
 // Export main functions for email-based operations
@@ -17,6 +18,7 @@ export const deactivateUser = deactivateUserByEmail;
 export const getUserStatus = getUserStatusByEmail;
 export const createUser = createUserDirect;
 export const resendInvitation = resendInvitationDirect;
+export const updateUserEmail = updateUserEmailDirect;
 
 // Export ID-based operations
 export const activateUserById = (userId) => setUserStatus(userId, true);

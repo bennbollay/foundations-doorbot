@@ -2,7 +2,7 @@ process.loadEnvFile();
 
 import http from 'http';
 import { fetchAllCameraSnapshots } from './protect.mjs';
-import { processNewMembers, processManagedAccess } from './webhook.mjs';
+import { processNewMembers, processManagedAccess, processEmailChanges } from './webhook.mjs';
 import { getUserStatus } from './access.mjs';
 import {
   createVisitorPass,
@@ -126,6 +126,29 @@ const handleAccessChange = async (res, body, action) => {
     activate: action === 'activate' ? emails : [],
     deactivate: action === 'deactivate' ? emails : [],
   });
+
+  const statusCode = result.failed.length > 0 ? 502 : 200;
+  return sendJson(res, statusCode, result);
+};
+
+// Change one or more members' email address (e.g. after an email update in the
+// member system). Accepts a single { oldEmail, newEmail } object or a batch via
+// { emailChanges: [{ oldEmail, newEmail }, ...] }.
+const handleEmailChange = async (res, body) => {
+  const changes = Array.isArray(body?.emailChanges)
+    ? body.emailChanges
+    : body?.oldEmail || body?.newEmail
+    ? [{ oldEmail: body.oldEmail, newEmail: body.newEmail }]
+    : [];
+
+  const invalid = changes.find((c) => !c || !c.oldEmail || !c.newEmail);
+  if (changes.length === 0 || invalid) {
+    return sendJson(res, 400, {
+      error: 'Each change requires oldEmail and newEmail',
+    });
+  }
+
+  const result = await processEmailChanges(changes);
 
   const statusCode = result.failed.length > 0 ? 502 : 200;
   return sendJson(res, statusCode, result);
@@ -259,6 +282,10 @@ const server = http.createServer(async (req, res) => {
       return await handleAccessChange(res, await readJsonBody(req), 'activate');
     }
 
+    if (req.method === 'POST' && url.pathname === '/api/members/change-email') {
+      return await handleEmailChange(res, await readJsonBody(req));
+    }
+
     if (req.method === 'GET' && url.pathname === '/api/members/status') {
       return await handleMemberStatus(res, url.searchParams.get('email'));
     }
@@ -301,6 +328,7 @@ server.listen(PORT, () => {
   console.log(`  POST /api/members              { email, firstName?, lastName? }`);
   console.log(`  POST /api/members/deactivate   { email }`);
   console.log(`  POST /api/members/activate     { email }`);
+  console.log(`  POST /api/members/change-email { oldEmail, newEmail }`);
   console.log(`  GET  /api/members/status?email=...`);
   console.log(`  POST   /api/visitor-passes         { firstName, startTime, endTime, ... }`);
   console.log(`  GET    /api/visitor-passes`);

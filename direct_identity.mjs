@@ -391,6 +391,79 @@ export async function createUser(firstName, lastName, email) {
   }
 }
 
+/**
+ * Change a user's email address, looking them up by their current (old) email.
+ * Uses the same PUT /proxy/access/api/v2/user/{id} write that group updates use.
+ * @param {string} oldEmail - The email currently on the user record
+ * @param {string} newEmail - The email to replace it with
+ * @returns {Object} { success, userId?, oldEmail, newEmail, error? }
+ */
+export async function updateUserEmail(oldEmail, newEmail) {
+  if (!newEmail || !newEmail.includes('@')) {
+    return { success: false, oldEmail, newEmail, error: 'Invalid new email' };
+  }
+
+  const user = await findUserByEmail(oldEmail);
+  if (!user) {
+    console.error(`User ${oldEmail} not found`);
+    return { success: false, oldEmail, newEmail, error: 'User not found' };
+  }
+
+  // Email is the primary lookup key everywhere, so refuse to create a duplicate.
+  const conflict = await findUserByEmail(newEmail);
+  if (conflict && conflict.id !== user.id) {
+    console.error(`Email ${newEmail} is already in use by another user (ID: ${conflict.id})`);
+    return { success: false, oldEmail, newEmail, error: 'New email already in use by another user' };
+  }
+
+  const auth = await getAuthToken();
+
+  const url = `${IDENTITY_BASE}/proxy/access/api/v2/user/${user.id}`;
+  const headers = {
+    'Accept': 'application/json, text/plain, */*',
+    'Content-Type': 'application/json',
+    'Origin': 'https://unifi.ui.com',
+    'Referer': 'https://unifi.ui.com/',
+    'Cookie': `TOKEN=${auth.token}`
+  };
+  if (auth.csrf) {
+    headers['X-Csrf-Token'] = auth.csrf;
+  }
+
+  console.log(`Changing email for ${user.name || oldEmail}: ${oldEmail} -> ${newEmail}`);
+
+  try {
+    console.log(`PUT ${url}`);
+    const res = await fetch(url, {
+      method: 'PUT',
+      headers,
+      body: JSON.stringify({ user_email: newEmail })
+    });
+
+    const text = await res.text();
+    let result = {};
+    try { result = text ? JSON.parse(text) : {}; } catch {}
+
+    if (res.ok && (result.code === 1 || result.codeS === 'SUCCESS')) {
+      // Verify the change took effect by looking the user up under the new email.
+      const updated = await findUserByEmail(newEmail);
+      if (updated && updated.id === user.id) {
+        console.log(`✅ Successfully changed email to ${newEmail} (ID: ${user.id})`);
+        return { success: true, userId: user.id, oldEmail, newEmail };
+      }
+      console.error(`Update reported success but user is not found under ${newEmail}`);
+      return { success: false, userId: user.id, oldEmail, newEmail, error: 'Update not reflected in lookup' };
+    }
+
+    const detail = result.msg || result.codeS || `${res.status} ${res.statusText}`;
+    console.error(`Failed to change email: ${detail}`);
+    return { success: false, userId: user.id, oldEmail, newEmail, error: detail };
+  } catch (e) {
+    console.error(`Error changing email: ${e.message}`);
+    return { success: false, userId: user.id, oldEmail, newEmail, error: e.message };
+  }
+}
+
 // High-level functions
 export async function activateUserByEmail(email) {
   const user = await findUserByEmail(email);

@@ -6,7 +6,8 @@ import {
   activateUser, 
   deactivateUser,
   getUserStatus,
-  resendInvitation 
+  resendInvitation,
+  updateUserEmail
 } from './access.mjs';
 import {
   resolveFoundationsGroupId,
@@ -232,6 +233,61 @@ export const processInviteResends = async (newInvites) => {
 };
 
 /**
+ * Process email changes, e.g. when a member updates their email in the member
+ * system. Each change carries the old email (the current lookup key) and the
+ * new email to replace it with.
+ * @param {Array} emailChanges - Array of { oldEmail, newEmail } objects
+ * @returns {Object} Results of email changes
+ */
+export const processEmailChanges = async (emailChanges) => {
+  const results = {
+    changed: [],
+    notFound: [],
+    failed: []
+  };
+
+  for (const change of emailChanges) {
+    const { oldEmail, newEmail } = change || {};
+    try {
+      console.log(`Changing email: ${oldEmail} -> ${newEmail}`);
+      const result = await updateUserEmail(oldEmail, newEmail);
+
+      if (result.success) {
+        results.changed.push({
+          oldEmail,
+          newEmail,
+          userId: result.userId,
+          message: 'Email changed successfully'
+        });
+      } else if (result.error === 'User not found') {
+        results.notFound.push({
+          oldEmail,
+          newEmail,
+          message: 'User not found'
+        });
+      } else {
+        results.failed.push({
+          oldEmail,
+          newEmail,
+          error: result.error,
+          message: 'Failed to change email'
+        });
+      }
+    } catch (error) {
+      console.error(`Failed to change email ${oldEmail} -> ${newEmail}:`, error);
+      results.failed.push({
+        oldEmail,
+        newEmail,
+        error: error.message,
+        message: 'Failed to change email'
+      });
+    }
+  }
+
+  return results;
+};
+
+/**
  * Sends door access events to a webhook endpoint and processes the response
  * @param {Array} events - Array of door access events
  * @returns {Object} Response from webhook with processing results
@@ -320,6 +376,12 @@ export const sendDoorEventsToWebhook = async (events) => {
       processingResults.inviteResends = await processInviteResends(response.newInvite);
     }
 
+    // Process email changes if present ([{ oldEmail, newEmail }, ...])
+    if (response.emailChanges && Array.isArray(response.emailChanges)) {
+      console.log(`Processing ${response.emailChanges.length} email changes...`);
+      processingResults.emailChanges = await processEmailChanges(response.emailChanges);
+    }
+
     // Log summary
     if (processingResults.memberCreation) {
       console.log('Member creation summary:', {
@@ -352,6 +414,14 @@ export const sendDoorEventsToWebhook = async (events) => {
         sent: processingResults.inviteResends.sent.length,
         notFound: processingResults.inviteResends.notFound.length,
         failed: processingResults.inviteResends.failed.length
+      });
+    }
+
+    if (processingResults.emailChanges) {
+      console.log('Email change summary:', {
+        changed: processingResults.emailChanges.changed.length,
+        notFound: processingResults.emailChanges.notFound.length,
+        failed: processingResults.emailChanges.failed.length
       });
     }
 

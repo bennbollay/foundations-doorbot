@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import { activateUser, deactivateUser, getUserStatus, activateUserById, deactivateUserById, getUserStatusById, createUser, resendInvitation } from './access.mjs';
+import { activateUser, deactivateUser, getUserStatus, activateUserById, deactivateUserById, getUserStatusById, createUser, resendInvitation, updateUserEmail } from './access.mjs';
 
 const program = new Command();
 
@@ -89,6 +89,25 @@ program
       process.exit(0);
     } else {
       console.error(`❌ Failed to create user: ${result?.error || 'Unknown error'}\n`);
+      process.exit(1);
+    }
+  });
+
+// Change email command
+program
+  .command('change-email <oldEmail> <newEmail>')
+  .description("Change a user's email address (looked up by their current email)")
+  .action(async (oldEmail, newEmail) => {
+    console.log(`\n✉️  Changing email: ${oldEmail} -> ${newEmail}\n`);
+    const result = await updateUserEmail(oldEmail, newEmail);
+    if (result && result.success) {
+      console.log(`✅ Successfully changed email`);
+      console.log(`  User ID: ${result.userId}`);
+      console.log(`  Old Email: ${result.oldEmail}`);
+      console.log(`  New Email: ${result.newEmail}\n`);
+      process.exit(0);
+    } else {
+      console.error(`❌ Failed to change email: ${result?.error || 'Unknown error'}\n`);
       process.exit(1);
     }
   });
