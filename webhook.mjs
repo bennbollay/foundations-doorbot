@@ -208,10 +208,37 @@ export const processInviteResends = async (newInvites) => {
           message: 'Invitation resent successfully'
         });
       } else if (result.error === 'User not found') {
-        results.notFound.push({
-          email,
-          message: 'User not found'
-        });
+        // Self-heal: newInvite is also queued for people whose UniFi account
+        // was never created (e.g. the scheduler's proactive create failed).
+        // Dead-ending on "user not found" left them with no path to access at
+        // all, so create the account (createUser assigns the Foundations
+        // group) and then send the invitation.
+        console.log(`User not found for ${email} — creating account before sending invitation`);
+        const createResult = await createUser('', '', email);
+        if (createResult?.success) {
+          const retry = await resendInvitation(email);
+          if (retry.success) {
+            results.sent.push({
+              email,
+              userId: retry.userId,
+              created: true,
+              message: 'Account created and invitation sent'
+            });
+          } else {
+            results.failed.push({
+              email,
+              created: true,
+              error: retry.error,
+              message: 'Account created but invitation send failed'
+            });
+          }
+        } else {
+          results.notFound.push({
+            email,
+            error: createResult?.error,
+            message: 'User not found and account creation failed'
+          });
+        }
       } else {
         results.failed.push({
           email,
