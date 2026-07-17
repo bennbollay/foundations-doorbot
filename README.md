@@ -186,9 +186,7 @@ doorbot status user@example.com
 
 ## Camera Snapshot API
 
-This repo can also run a small HTTP API that returns the current snapshot for every camera in UniFi Protect.
-
-It uses the same auth pattern as the door access logs: cookie-based login via `UNIFI_DOOR_API` host with username/password credentials.
+This repo can also run a small HTTP API that returns the current snapshot for every camera in UniFi Protect, aggregated across one or more Protect consoles (e.g. a UNVR plus a UDM that hosts the door access devices). All configured controllers are queried in parallel and the results are merged into a single response.
 
 ### Environment
 
@@ -196,20 +194,28 @@ Add these values to your `.env`:
 
 ```bash
 CAMERA_API_PORT=8787
-CAMERA_API_PATH=/api/camera-snapshots
 CAMERA_API_KEY=replace-with-your-api-key
 CAMERA_SNAPSHOT_TIMEOUT_MS=10000
 CAMERA_SNAPSHOT_CONCURRENCY=4
 CAMERA_SNAPSHOT_START_INTERVAL_MS=150
 
-# Protect uses the same console as UNIFI_DOOR_API (without the :12445 port)
-# and the same credentials as UNIFI_CLOUD_USERNAME/PASSWORD
-# Override with UNIFI_PROTECT_USERNAME/PASSWORD if needed
+# First Protect controller (required)
+UNIFI_PROTECT_HOST=https://192.168.6.199
+UNIFI_PROTECT_API_TOKEN=your_protect_integration_api_key
+UNIFI_PROTECT_NAME=UNVR
+
+# Additional controllers use _2, _3, ... suffixes
+UNIFI_PROTECT_HOST_2=https://192.168.1.1
+UNIFI_PROTECT_NAME_2=UDM
+#UNIFI_PROTECT_API_TOKEN_2=optional_api_key
 ```
 
 Notes:
-- The Protect base URL is derived from `UNIFI_DOOR_API` by stripping the `:12445` port. No separate Protect URL is needed.
-- Protect credentials fall back to `UNIFI_CLOUD_USERNAME`/`UNIFI_CLOUD_PASSWORD` if `UNIFI_PROTECT_USERNAME`/`UNIFI_PROTECT_PASSWORD` are not set.
+- Each controller authenticates with its own integration API token (`UNIFI_PROTECT_API_TOKEN`, `UNIFI_PROTECT_API_TOKEN_2`, ...) if set; otherwise it uses cookie-based username/password login.
+- Username/password per controller (`UNIFI_PROTECT_USERNAME_2`, ...) falls back to the unsuffixed `UNIFI_PROTECT_USERNAME`/`UNIFI_PROTECT_PASSWORD`, then to `UNIFI_CLOUD_USERNAME`/`UNIFI_CLOUD_PASSWORD`.
+- `UNIFI_PROTECT_NAME`/`UNIFI_PROTECT_NAME_2` are optional labels included as `controller` on each camera in the response (defaults to the host).
+- Concurrency and rate limiting are applied per controller, since each NVR enforces its own snapshot rate limit.
+- If one controller is unreachable, its error is reported in `failures` and the other controllers' cameras are still returned. The request only fails outright if every controller fails.
 
 ### Run the API
 
@@ -243,6 +249,7 @@ The response is JSON with success/failure counts for all cameras. The `cameras` 
     {
       "id": "camera-id",
       "name": "Front Door",
+      "controller": "UNVR",
       "contentType": "image/jpeg",
       "snapshotBase64": "/9j/4AAQSk..."
     }
@@ -250,7 +257,7 @@ The response is JSON with success/failure counts for all cameras. The `cameras` 
 }
 ```
 
-If a snapshot request fails, it is counted in `failed` and logged server-side with the camera name, start/end time, duration, byte count, and error.
+If a snapshot request fails, it is counted in `failed` and logged server-side with the camera name, start/end time, duration, byte count, and error. An entire controller failing (unreachable, bad credentials) appears as a `failures` entry with `id: null` and the `controller` name.
 
 ## Member Management API
 

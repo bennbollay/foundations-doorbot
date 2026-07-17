@@ -1,7 +1,7 @@
 process.loadEnvFile();
 
 import http from 'http';
-import { fetchAllCameraSnapshots } from './protect.mjs';
+import { fetchAllCameraSnapshots, getControllerConfigs } from './protect.mjs';
 import { processNewMembers, processManagedAccess, processEmailChanges } from './webhook.mjs';
 import { getUserStatus } from './access.mjs';
 import {
@@ -334,6 +334,13 @@ server.listen(PORT, () => {
   console.log(`  GET    /api/visitor-passes`);
   console.log(`  GET    /api/visitor-passes/:id`);
   console.log(`  DELETE /api/visitor-passes/:id     (?force=true to hard-delete)`);
-  console.log(`Protect host: ${process.env.UNIFI_PROTECT_HOST}`);
-  console.log(`Auth mode: ${process.env.UNIFI_PROTECT_API_TOKEN ? 'API token' : 'username/password'}`);
+  try {
+    for (const controller of getControllerConfigs()) {
+      console.log(
+        `Protect controller "${controller.name}": ${controller.baseUrl} (auth: ${controller.useToken ? 'API token' : 'username/password'})`
+      );
+    }
+  } catch (error) {
+    console.warn(`Protect not configured: ${error.message}`);
+  }
 });

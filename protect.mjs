@@ -67,34 +67,64 @@ function formatLogTime(timestampMs) {
   return new Date(timestampMs).toISOString();
 }
 
-function getConfig() {
-  const host = process.env.UNIFI_PROTECT_HOST;
-  const token = process.env.UNIFI_PROTECT_API_TOKEN;
-  const username = process.env.UNIFI_PROTECT_USERNAME || process.env.UNIFI_CLOUD_USERNAME;
-  const password = process.env.UNIFI_PROTECT_PASSWORD || process.env.UNIFI_CLOUD_PASSWORD;
+// Cameras can live on more than one Protect console (e.g. a UNVR plus a UDM
+// with door access devices). Controllers are configured with numbered env
+// suffixes: UNIFI_PROTECT_HOST for the first, UNIFI_PROTECT_HOST_2 for the
+// second, and so on. Per-controller auth uses the matching suffix
+// (UNIFI_PROTECT_API_TOKEN_2, UNIFI_PROTECT_USERNAME_2, ...), falling back to
+// the unsuffixed Protect credentials and then UNIFI_CLOUD_USERNAME/PASSWORD.
+const MAX_CONTROLLERS = 8;
 
-  if (!host) {
-    throw new Error('UNIFI_PROTECT_HOST must be set (e.g. https://192.168.6.199)');
+export function getControllerConfigs() {
+  const controllers = [];
+
+  for (let index = 1; index <= MAX_CONTROLLERS; index += 1) {
+    const suffix = index === 1 ? '' : `_${index}`;
+    const host = process.env[`UNIFI_PROTECT_HOST${suffix}`];
+
+    if (!host) {
+      if (index === 1) {
+        throw new Error('UNIFI_PROTECT_HOST must be set (e.g. https://192.168.6.199)');
+      }
+      continue;
+    }
+
+    const token = process.env[`UNIFI_PROTECT_API_TOKEN${suffix}`];
+    const username =
+      process.env[`UNIFI_PROTECT_USERNAME${suffix}`] ||
+      process.env.UNIFI_PROTECT_USERNAME ||
+      process.env.UNIFI_CLOUD_USERNAME;
+    const password =
+      process.env[`UNIFI_PROTECT_PASSWORD${suffix}`] ||
+      process.env.UNIFI_PROTECT_PASSWORD ||
+      process.env.UNIFI_CLOUD_PASSWORD;
+
+    if (!token && (!username || !password)) {
+      throw new Error(
+        `Set UNIFI_PROTECT_API_TOKEN${suffix} or UNIFI_PROTECT_USERNAME${suffix}/UNIFI_PROTECT_PASSWORD${suffix}`
+      );
+    }
+
+    const baseUrl = host.replace(/\/+$/, '');
+
+    controllers.push({
+      name: process.env[`UNIFI_PROTECT_NAME${suffix}`] || baseUrl.replace(/^https?:\/\//, ''),
+      baseUrl,
+      token,
+      username,
+      password,
+      useToken: Boolean(token),
+    });
   }
 
-  if (!token && (!username || !password)) {
-    throw new Error('Set UNIFI_PROTECT_API_TOKEN or UNIFI_PROTECT_USERNAME/UNIFI_PROTECT_PASSWORD');
-  }
-
-  return {
-    baseUrl: host.replace(/\/+$/, ''),
-    token,
-    username,
-    password,
-    useToken: Boolean(token),
-  };
+  return controllers;
 }
 
-async function getProtectSession() {
-  const config = getConfig();
+async function getProtectSession(config) {
 
   if (config.useToken) {
     return {
+      controllerName: config.name,
       baseUrl: config.baseUrl,
       headers: {
         'X-API-KEY': config.token,
@@ -168,6 +198,7 @@ async function getProtectSession() {
   }
 
   return {
+    controllerName: config.name,
     baseUrl: config.baseUrl,
     headers,
     cameraListPath: '/proxy/protect/api/bootstrap',
@@ -176,8 +207,8 @@ async function getProtectSession() {
   };
 }
 
-export async function listProtectCameras() {
-  const session = await getProtectSession();
+export async function listProtectCameras(config) {
+  const session = await getProtectSession(config);
 
   const response = await fetch(`${session.baseUrl}${session.cameraListPath}`, {
     headers: session.headers,
@@ -200,6 +231,7 @@ export async function listProtectCameras() {
       name: camera.name || camera.marketName || camera.mac || camera.id,
       isConnected: camera.isConnected ?? camera.state === 'CONNECTED' ?? null,
       model: camera.modelKey || camera.type || null,
+      controller: session.controllerName,
     }))
     .filter((c) => c.id);
 
@@ -285,15 +317,20 @@ export async function fetchCameraSnapshot(session, camera, { highQuality = true,
   }
 }
 
-export async function fetchAllCameraSnapshots(options = {}) {
-  const highQuality = options.highQuality ?? true;
-  const timeoutMs = options.timeoutMs ?? getSnapshotTimeoutMs();
-  const concurrency = options.concurrency ?? getSnapshotConcurrency();
-  const startIntervalMs = options.startIntervalMs ?? getSnapshotStartIntervalMs();
-  const { session, cameras } = await listProtectCameras();
+// Fetches every camera on a single controller. Snapshot rate limits are
+// per-NVR, so each controller gets its own concurrency pool and start gate.
+async function fetchControllerSnapshots(config, { highQuality, timeoutMs, concurrency, startIntervalMs }) {
+  const { session, cameras: allCameras } = await listProtectCameras(config);
+
+  // Controllers can list adopted-but-offline cameras; snapshot requests for
+  // them always fail (500), so skip the fetch and report them directly.
+  const disconnected = allCameras
+    .filter((camera) => camera.isConnected === false)
+    .map((camera) => ({ ...camera, error: 'Camera is disconnected' }));
+  const cameras = allCameras.filter((camera) => camera.isConnected !== false);
 
   console.log(
-    `[camera-snapshot] fetching ${cameras.length} cameras concurrency=${concurrency} timeoutMs=${timeoutMs} startIntervalMs=${startIntervalMs}`
+    `[camera-snapshot] controller="${config.name}" fetching ${cameras.length} cameras (${disconnected.length} disconnected skipped) concurrency=${concurrency} timeoutMs=${timeoutMs} startIntervalMs=${startIntervalMs}`
   );
 
   const results = await mapWithConcurrency(
@@ -312,14 +349,65 @@ export async function fetchAllCameraSnapshots(options = {}) {
     }
   );
 
+  return results.concat(disconnected);
+}
+
+export async function fetchAllCameraSnapshots(options = {}) {
+  const highQuality = options.highQuality ?? true;
+  const timeoutMs = options.timeoutMs ?? getSnapshotTimeoutMs();
+  const concurrency = options.concurrency ?? getSnapshotConcurrency();
+  const startIntervalMs = options.startIntervalMs ?? getSnapshotStartIntervalMs();
+  const controllers = getControllerConfigs();
+
+  // Controllers are independent consoles, so query them in parallel. A
+  // controller that is unreachable or misconfigured is reported as a failure
+  // entry instead of failing the whole request, as long as another controller
+  // still responds.
+  const perControllerResults = await Promise.all(
+    controllers.map(async (config) => {
+      try {
+        return {
+          controller: config.name,
+          results: await fetchControllerSnapshots(config, {
+            highQuality,
+            timeoutMs,
+            concurrency,
+            startIntervalMs,
+          }),
+        };
+      } catch (error) {
+        console.error(`[camera-snapshot] controller="${config.name}" failed: ${error.message}`);
+        return { controller: config.name, controllerError: error.message };
+      }
+    })
+  );
+
+  const controllerErrors = perControllerResults
+    .filter((entry) => entry.controllerError)
+    .map(({ controller, controllerError }) => ({
+      id: null,
+      name: null,
+      isConnected: null,
+      controller,
+      error: controllerError,
+    }));
+
+  if (controllerErrors.length === controllers.length) {
+    throw new Error(
+      `All Protect controllers failed: ${controllerErrors.map((e) => `${e.controller}: ${e.error}`).join('; ')}`
+    );
+  }
+
+  const results = perControllerResults.flatMap((entry) => entry.results || []);
   const successfulSnapshots = results.filter((c) => !c.error);
   const failures = results
     .filter((c) => c.error)
-    .map(({ id, name, isConnected, error }) => ({ id, name, isConnected, error }));
+    .map(({ id, name, isConnected, controller, error }) => ({ id, name, isConnected, controller, error }))
+    .concat(controllerErrors);
 
   return {
     generatedAt: new Date().toISOString(),
-    totalCameras: cameras.length,
+    totalCameras: results.length,
     succeeded: successfulSnapshots.length,
     failed: failures.length,
     cameras: successfulSnapshots,
