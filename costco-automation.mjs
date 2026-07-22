@@ -586,6 +586,9 @@ async function addCurrentProductToCart(page, quantity) {
     if (!bumped) break;
     await delay(500);
   }
+  // Adding to cart frequently pops a "Customers also considered" upsell
+  // dialog that would block the cart/checkout controls later.
+  await dismissOverlays(page);
   return true;
 }
 
@@ -649,7 +652,33 @@ async function addItemToCart(page, item) {
   }
 }
 
+/**
+ * Close upsell/interstitial modals ("Customers also considered", "You may also
+ * like", …) that Instacart opens after adding an item to the cart. These
+ * dialogs sit over the page and block the cart drawer/checkout button. The
+ * cart drawer itself is also a dialog, so anything whose text mentions
+ * checkout is left alone.
+ */
+async function dismissOverlays(page) {
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const dialog = page.locator("[role='dialog'], [aria-modal='true']").last();
+    if (!(await dialog.isVisible().catch(() => false))) return;
+    const text = ((await dialog.innerText().catch(() => '')) || '').toLowerCase();
+    if (text.includes('checkout')) return; // that's the cart drawer — keep it
+    const closeBtn = dialog
+      .locator("[aria-label*='close' i], [data-testid*='close' i]")
+      .first();
+    const closed = await closeBtn
+      .click({ timeout: 3_000 })
+      .then(() => true)
+      .catch(() => false);
+    if (!closed) await page.keyboard.press('Escape').catch(() => {});
+    await delay(800);
+  }
+}
+
 async function openCart(page) {
+  await dismissOverlays(page);
   // The header cart control is an icon button with an aria-label, not text.
   const iconBtn = page
     .locator("[aria-label*='cart' i]:not([aria-label*='add' i]), [data-testid*='cart' i]")
@@ -834,7 +863,22 @@ export async function submitOrder(params) {
         'before submitting.';
       return result;
     }
-    if (!(await clickByText(page, ['go to checkout', 'checkout', 'continue to checkout']))) {
+    let checkoutClicked = await clickByText(page, [
+      'go to checkout',
+      'checkout',
+      'continue to checkout',
+    ]);
+    if (!checkoutClicked) {
+      // An upsell dialog may have re-opened over the cart — clear it and retry.
+      await dismissOverlays(page);
+      await openCart(page);
+      checkoutClicked = await clickByText(page, [
+        'go to checkout',
+        'checkout',
+        'continue to checkout',
+      ]);
+    }
+    if (!checkoutClicked) {
       await saveArtifacts(page, 'cart-no-checkout-button');
       result.error = 'Could not find the checkout button.';
       return result;

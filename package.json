@@ -19,10 +19,7 @@
     "costco:serve": "node costco-automation.mjs serve",
     "costco:login": "node costco-automation.mjs login",
     "costco:status": "node costco-automation.mjs status",
-    "costco:submit-test": "node costco-automation.mjs submit-test",
-    "costco:install": "bash install-costco-automation.sh",
-    "costco:uninstall": "launchctl unload ~/Library/LaunchAgents/com.foundations.costco-automation.plist 2>/dev/null; rm -f ~/Library/LaunchAgents/com.foundations.costco-automation.plist && echo 'Uninstalled com.foundations.costco-automation'",
-    "costco:logs": "tail -f costco-automation.log costco-automation.err.log"
+    "costco:submit-test": "node costco-automation.mjs submit-test"
   },
   "bin": {
     "doorbot": "./cli.mjs"

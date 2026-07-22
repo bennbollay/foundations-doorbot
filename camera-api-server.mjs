@@ -1,6 +1,7 @@
 process.loadEnvFile();
 
 import http from 'http';
+import { createCostcoServer } from './costco-automation.mjs';
 import { fetchAllCameraSnapshots, getControllerConfigs } from './protect.mjs';
 import { processNewMembers, processManagedAccess, processEmailChanges } from './webhook.mjs';
 import { getUserStatus } from './access.mjs';
@@ -254,8 +255,18 @@ const handleDeleteVisitorPass = async (res, visitorId, searchParams) => {
 
 const VISITOR_PASS_PATH = /^\/api\/visitor-passes\/([^/]+)$/;
 
+// Costco Same-Day automation routes, mounted on this server so everything
+// shares one port (ngrok exposes a single tunnel). The express app does its
+// own auth (COSTCO_AUTOMATION_API_KEY, falling back to CAMERA_API_KEY) and
+// JSON parsing, so requests are handed off before this server's auth check.
+const costcoApp = createCostcoServer();
+
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url || '/', `http://${req.headers.host || 'localhost'}`);
+
+  if (url.pathname.startsWith('/api/costco')) {
+    return costcoApp(req, res);
+  }
 
   if (req.method === 'GET' && url.pathname === '/health') {
     return sendJson(res, 200, { ok: true });
@@ -322,6 +333,11 @@ server.on('error', (error) => {
   process.exit(1);
 });
 
+// The Costco routes are multi-minute browser flows (callers use timeouts of
+// up to 15 min) — Node's default 5-minute requestTimeout would cut them off.
+server.requestTimeout = 0;
+server.headersTimeout = 60_000;
+
 server.listen(PORT, () => {
   console.log(`Camera + member API listening on http://localhost:${PORT}`);
   console.log(`  GET  /api/camera-snapshots`);
@@ -334,6 +350,10 @@ server.listen(PORT, () => {
   console.log(`  GET    /api/visitor-passes`);
   console.log(`  GET    /api/visitor-passes/:id`);
   console.log(`  DELETE /api/visitor-passes/:id     (?force=true to hard-delete)`);
+  console.log(`  GET  /api/costco/session`);
+  console.log(`  POST /api/costco/orders/sync   { max_orders? }`);
+  console.log(`  POST /api/costco/search        { query, limit? }`);
+  console.log(`  POST /api/costco/order         { address_needle, address_label, items, card_last4, dry_run }`);
   try {
     for (const controller of getControllerConfigs()) {
       console.log(

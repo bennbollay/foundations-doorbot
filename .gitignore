@@ -15,3 +15,5 @@ network-diag/
 costco-automation.err.log
 costco-automation.log
 *.log
+costco-automation.log
+costco-automation.err.log

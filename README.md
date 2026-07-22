@@ -404,7 +404,6 @@ datacenter IPs and cloud browsers — the office connection passes.
 
 ```bash
 COSTCO_AUTOMATION_API_KEY=   # x-api-key secret; falls back to CAMERA_API_KEY
-COSTCO_AUTOMATION_PORT=8789
 COSTCO_PROFILE_DIR=          # default ~/.costco-automation-profile
 COSTCO_HEADLESS=true
 COSTCO_DEBUG_DIR=            # default ~/costco-debug
@@ -414,12 +413,19 @@ COSTCO_ALERT_SLACK_CHANNEL_ID=  # optional: Slack alert when re-login is needed
 
 ### Run the server
 
+The `/api/costco/*` routes are mounted on the camera API server, so they share
+its port (8787) and the single ngrok tunnel — running the camera API
+(`npm run camera-api`, or the `com.foundations.camera-api` launchd service)
+serves them too. After pulling changes, restart it:
+
 ```bash
-npm run costco:serve        # foreground
-npm run costco:install      # install + start the launchd service (keeps it alive)
-npm run costco:logs         # tail costco-automation.log / .err.log
-npm run costco:uninstall
+npm run camera-api:install   # reinstalls + restarts the launchd service
+npm run camera-api:logs
 ```
+
+For ad-hoc use there is also a standalone mode on its own port
+(`COSTCO_AUTOMATION_PORT`, default 8789): `npm run costco:serve`. Don't run it
+alongside the camera API instance — they'd fight over the Chrome profile.
 
 Endpoints (all JSON; auth header `x-api-key` on everything except `/health`):
 `GET /health`, `GET /api/costco/session`, `POST /api/costco/orders/sync`,
@@ -461,8 +467,9 @@ node costco-automation.mjs search "paper towels"
 Cookies stay valid server-side for weeks and are refreshed after every
 successful operation, but eventually they die. When that happens, operations
 fail with a "The Costco session has expired…" error (returned to API callers,
-shown to foundations admins, and posted to Slack if
-`COSTCO_ALERT_SLACK_CHANNEL_ID` is set). The fix is to re-run the bootstrap:
+shown to foundations admins, posted to Slack if
+`COSTCO_ALERT_SLACK_CHANNEL_ID` is set, and visible in the camera API logs
+with a `[costco]` prefix). The fix is to re-run the bootstrap:
 `npm run costco:login`.
 
 ### Debugging
