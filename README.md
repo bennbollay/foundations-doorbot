@@ -391,3 +391,85 @@ Run the visitor pass test suite against a mock UniFi server (no hardware needed)
 ```bash
 node test-visitor-passes.mjs
 ```
+
+## Costco Same-Day Automation
+
+`costco-automation.mjs` drives the installed Google Chrome (via Playwright)
+against sameday.costco.com and exposes an HTTP API the foundations app calls
+for order-history sync, product search, and (dry-run by default) checkout. It
+runs on this machine because Costco's identity provider blocks logins from
+datacenter IPs and cloud browsers — the office connection passes.
+
+### Environment
+
+```bash
+COSTCO_AUTOMATION_API_KEY=   # x-api-key secret; falls back to CAMERA_API_KEY
+COSTCO_AUTOMATION_PORT=8789
+COSTCO_PROFILE_DIR=          # default ~/.costco-automation-profile
+COSTCO_HEADLESS=true
+COSTCO_DEBUG_DIR=            # default ~/costco-debug
+COSTCO_TIMEOUT_MS=60000
+COSTCO_ALERT_SLACK_CHANNEL_ID=  # optional: Slack alert when re-login is needed
+```
+
+### Run the server
+
+```bash
+npm run costco:serve        # foreground
+npm run costco:install      # install + start the launchd service (keeps it alive)
+npm run costco:logs         # tail costco-automation.log / .err.log
+npm run costco:uninstall
+```
+
+Endpoints (all JSON; auth header `x-api-key` on everything except `/health`):
+`GET /health`, `GET /api/costco/session`, `POST /api/costco/orders/sync`,
+`POST /api/costco/search`, `POST /api/costco/order`. These are slow browser
+flows — callers should allow ~3 min for search, ~10 min for orders sync, and
+~15 min for an order. `POST /api/costco/order` is dry-run unless the body
+explicitly sends `dry_run: false`.
+
+### Bootstrap the login (once per machine)
+
+Login cannot be scripted — Costco's bot protection (PerimeterX) swallows
+credential submissions from any automated browser, even with a human typing.
+So sign in once by hand, on this machine, with a display (Screen Sharing
+works):
+
+```bash
+npm run costco:login
+```
+
+That opens a **regular** Chrome window on the Costco Same-Day orders page.
+Click "Sign in via Costco.com", sign in (check **"Keep me signed in"** — the
+account credentials are in the on-call vault, see `COSTCO_EMAIL` /
+`COSTCO_PASSWORD` in `.env.sample`), wait until you're back on
+sameday.costco.com signed in, then return to the terminal and press Enter.
+The session cookies are captured to `$COSTCO_PROFILE_DIR/session-cookies.json`
+and the command verifies the headless automation is signed in.
+
+Other ops commands:
+
+```bash
+npm run costco:status       # is the session still signed in?
+npm run costco:submit-test  # dry-run checkout rehearsal (never places an order)
+node costco-automation.mjs orders 5
+node costco-automation.mjs search "paper towels"
+```
+
+### When the session expires
+
+Cookies stay valid server-side for weeks and are refreshed after every
+successful operation, but eventually they die. When that happens, operations
+fail with a "The Costco session has expired…" error (returned to API callers,
+shown to foundations admins, and posted to Slack if
+`COSTCO_ALERT_SLACK_CHANNEL_ID` is set). The fix is to re-run the bootstrap:
+`npm run costco:login`.
+
+### Debugging
+
+Every failed browser operation writes a full-page screenshot and HTML dump to
+`COSTCO_DEBUG_DIR` (default `~/costco-debug`), and the error message returned
+to the caller includes the artifact path. Dry-run checkouts also snapshot the
+final checkout page there. Use
+`node costco-automation.mjs explore <storefront|orders|search|url>` to dump a
+page's visible buttons/links when tuning selectors after a site change.
