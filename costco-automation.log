@@ -3063,3 +3063,2123 @@
 [costco]   POST /api/costco/orders/sync { max_orders? }
 [costco]   POST /api/costco/search      { query, limit? }
 [costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }
+[costco] Costco automation server listening on http://localhost:8789
+[costco]   GET  /api/costco/session
+[costco]   POST /api/costco/orders/sync { max_orders? }
+[costco]   POST /api/costco/search      { query, limit? }
+[costco]   POST /api/costco/order       { address_needle, address_label, items, card_last4, dry_run }

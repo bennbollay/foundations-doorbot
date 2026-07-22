@@ -12,3 +12,6 @@ test-login.mjs
 camera-api.log
 camera-api.err.log
 network-diag/
+costco-automation.err.log
+costco-automation.log
+*.log
