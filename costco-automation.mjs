@@ -500,11 +500,18 @@ function searchUrl(query) {
 }
 
 async function scrapeSearchResults(page, limit) {
-  return page.evaluate((max) => {
-    const results = [];
+  const scraped = await page.evaluate((max) => {
+    // Search pages render sponsored/featured carousels ABOVE the real results
+    // grid. Anchor on the "Results for …" heading when present and prefer
+    // tiles after it; tiles inside a container mentioning "sponsored" or
+    // "featured" are deprioritized either way.
+    const resultsHeading = [...document.querySelectorAll('h1, h2, h3')].find((h) =>
+      /\bresults?\b/i.test(h.textContent || '')
+    );
+    const collect = [];
     const seen = new Set();
     document.querySelectorAll("a[href*='/products/']").forEach((a) => {
-      if (results.length >= max) return;
+      if (collect.length >= max * 4) return;
       const img = a.querySelector('img');
       const name = (img?.alt || a.getAttribute('aria-label') || a.textContent || '')
         .trim()
@@ -517,21 +524,33 @@ async function scrapeSearchResults(page, limit) {
       const key = name.toLowerCase();
       if (seen.has(key)) return;
       seen.add(key);
-      const text = a.closest('li, article, div')?.textContent || '';
+      const container = a.closest('li, article, div');
+      const text = container?.textContent || '';
       const priceMatch = text.match(/\$\d[\d,]*\.?\d{0,2}/);
       const sizeMatch = text.match(
         /\d+(\.\d+)?\s?(ct|oz|lb|lbs|fl oz|gal|qt|pk|count|pack|kg|g|ml|l)\b/i
       );
-      results.push({
+      const sponsored = /\b(sponsored|featured)\b/i.test(
+        (container?.closest('section, [role="region"]') || container)?.textContent?.slice(0, 400) || ''
+      );
+      const afterHeading = resultsHeading
+        ? !!(resultsHeading.compareDocumentPosition(a) & Node.DOCUMENT_POSITION_FOLLOWING)
+        : true;
+      collect.push({
         name: name.slice(0, 200),
         productUrl: a.href,
         imageUrl: img?.src || undefined,
         priceText: priceMatch ? priceMatch[0] : undefined,
         sizeText: sizeMatch ? sizeMatch[0] : undefined,
+        _rank: (afterHeading ? 0 : 2) + (sponsored ? 1 : 0),
       });
     });
-    return results;
+    return collect;
   }, limit);
+  return scraped
+    .sort((a, b) => a._rank - b._rank)
+    .slice(0, limit)
+    .map(({ _rank, ...r }) => r);
 }
 
 export async function searchProducts(query, limit = 8) {
