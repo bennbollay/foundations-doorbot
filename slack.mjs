@@ -15,6 +15,7 @@ const loadConfig = () => {
 const slackConfig = loadConfig();
 const slackOAuthToken = process.env.SLACK_OAUTH_BOT_TOKEN;
 const slackChannelId = process.env.SLACK_CHANNEL_ID;
+const slackPostingDisabled = ['1', 'true', 'yes'].includes((process.env.SLACK_POSTING_DISABLED || '').toLowerCase());
 
 // These were experimentally identified by looking at response payloads.
 const slackLinkedInProfileId = slackConfig.slackLinkedInProfileId || '';
@@ -105,6 +106,10 @@ const createSlackMessageBlock = async (time, users) => {
 };
 
 const updateSlackMessage = async (ts, message) => {
+  if (slackPostingDisabled) {
+    console.log('SLACK_POSTING_DISABLED is set; skipping Slack message update');
+    return;
+  }
   const body = { channel: slackChannelId, ts, unfurl_links: false, blocks: message.blocks };
   const result = await fetch('https://slack.com/api/chat.update', {
     method: 'POST',
@@ -119,6 +124,10 @@ const updateSlackMessage = async (ts, message) => {
 };
 
 const postSlackMessage = async (message) => {
+  if (slackPostingDisabled) {
+    console.log('SLACK_POSTING_DISABLED is set; skipping Slack message post');
+    return undefined;
+  }
   const body = { channel: slackChannelId, unfurl_links: false, blocks: message.blocks };
   const result = await fetch('https://slack.com/api/chat.postMessage', {
     method: 'POST',
