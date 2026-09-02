@@ -392,6 +392,86 @@ Run the visitor pass test suite against a mock UniFi server (no hardware needed)
 node test-visitor-passes.mjs
 ```
 
+## Intercom Directory API
+
+The entry intercom (UA-G3-Intercom at the building door) shows visitors a searchable **directory**: each entry is a company name plus the UniFi Access users a call should ring (they answer on the UniFi Identity Endpoint app). This API lets Foundations push company listings onto the callbox directly instead of an admin typing them into the UniFi Access console.
+
+UniFi publishes no API for the intercom directory, so `intercom.mjs` drives the same undocumented endpoints the UniFi Access web UI uses (`/proxy/access/api/v2/callers/...`), authenticated with the Identity session from `direct_identity.mjs` — the same login the member-management endpoints use. No extra `UNIFI_DOOR_TOKEN` permissions are needed.
+
+How it maps:
+
+- A directory **entry** is a UniFi "room" on the intercom caller device.
+- Each **contact** is resolved by email to a UniFi Access user (via the same lookup as `/api/members`) and attached as a call receiver. Plain Access users work — receivers do not need to be UniFi admins.
+- Contacts with no email, no UniFi account, or a deactivated account are reported back per entry as `unresolvedContacts` instead of being dropped. An entry where **no** contact resolves is reported in `failed` (a listing nobody can answer is not created).
+- **Ownership**: the module records which rooms it created (or adopted by matching name) in `.intercom_directory_state.json`. `replace` mode only ever deletes rooms in that file — hand-made entries such as **Building Admins** are never touched and are listed in the response as `unmanaged`.
+- Syncs are serialized in-process so concurrent requests can't create duplicate rooms.
+
+### Environment
+
+- `UNIFI_INTERCOM_DEVICE_ID` (optional) — the caller device id to manage. When unset, the single `UA-G3-Intercom` among the caller devices is used; the server errors if there are zero or several.
+- `INTERCOM_DIRECTORY_STATE_FILE` (optional) — path of the managed-rooms state file (default `.intercom_directory_state.json` in the working directory).
+
+### Endpoints
+
+All endpoints require the same `CAMERA_API_KEY` auth as above.
+
+| Method | Path | Body | Description |
+|--------|------|------|-------------|
+| `GET`  | `/api/intercom/directory` | | Current directory: every room with its receivers and whether this server manages it. |
+| `POST` | `/api/intercom/directory/sync` | `{ "entries": [...], "mode"?: "upsert" \| "replace" }` | Create/update listings; `replace` also removes previously-synced listings missing from `entries`. |
+
+Entry shape: `{ "key"?: "company:42", "company": "Acme Corp", "contacts": [{ "name"?: "Jane Doe", "email": "jane@acme.com" }] }`. `key` is an optional caller-owned stable id — when provided, a company renamed on the Foundations side updates its existing room instead of creating a second one.
+
+Response (`200`, even with per-entry failures — read `failed`):
+
+```json
+{
+  "ok": true,
+  "callerId": "847848340d5a",
+  "callerName": "UA G3 Intercom 0d5a",
+  "mode": "upsert",
+  "synced": [
+    {
+      "company": "Acme Corp",
+      "roomId": "b0365729-a504-4f36-b4cb-d5303d2d61c0",
+      "status": "created",
+      "receiverCount": 1,
+      "resolvedContacts": [{ "name": "Jane Doe", "email": "jane@acme.com", "userId": "293c6d7a-…" }],
+      "unresolvedContacts": [{ "name": "New Hire", "email": "new@acme.com", "reason": "no_unifi_account" }]
+    }
+  ],
+  "removed": [],
+  "failed": [],
+  "unmanaged": [{ "roomId": "096e4ed8-…", "name": "Building Admins" }]
+}
+```
+
+`status` is `created`, `updated` (name or receivers changed), or `unchanged`. `unresolvedContacts[].reason` is one of `no_email`, `no_unifi_account`, `unifi_account_inactive`, `no_user_id`, or `lookup_failed: …`.
+
+### Examples
+
+```bash
+curl -H "x-api-key: replace-with-your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "entries": [
+      { "key": "company:42", "company": "Acme Corp",
+        "contacts": [{ "name": "Jane Doe", "email": "jane@acme.com" }] }
+    ]
+  }' \
+  "http://localhost:8787/api/intercom/directory/sync"
+```
+
+### Testing
+
+```bash
+node test-intercom-directory.mjs                    # mock Identity/Access proxy, no hardware
+node test-intercom-directory.mjs --list             # read the live directory
+node test-intercom-directory.mjs --live you@x.com   # reversible live check: create → update → delete a test entry
+```
+
+The live check only creates rooms named `ZZ Root Sync Test …` and removes them on exit, whether or not the assertions pass.
+
 ## Costco Same-Day Automation
 
 `costco-automation.mjs` drives the installed Google Chrome (via Playwright)

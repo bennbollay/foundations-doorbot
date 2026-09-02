@@ -11,8 +11,14 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 // The exact Identity host from browser capture
 const IDENTITY_HOST = 'd8b3705351d507855f7d07e296d4064690a08.id.ui.direct';
-const IDENTITY_BASE = `https://${IDENTITY_HOST}`;
+export const IDENTITY_BASE = process.env.UNIFI_IDENTITY_BASE_URL || `https://${IDENTITY_HOST}`;
 const AUTH_CACHE_FILE = '.direct_identity_auth.json';
+
+// Drop the cached session so the next getAuthToken() re-authenticates
+// (used by callers that see a 401 on an Identity/Access proxy request).
+export function clearAuthCache() {
+  try { fs.unlinkSync(AUTH_CACHE_FILE); } catch {}
+}
 
 // Load cached auth
 function loadAuth() {

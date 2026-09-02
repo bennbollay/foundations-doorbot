@@ -12,6 +12,7 @@ import {
   deleteVisitor,
   toEpochSeconds,
 } from './visitors.mjs';
+import { getIntercomDirectory, syncIntercomDirectory } from './intercom.mjs';
 
 const PORT = Number(process.env.CAMERA_API_PORT || '8787');
 const API_KEY = process.env.CAMERA_API_KEY;
@@ -255,6 +256,37 @@ const handleDeleteVisitorPass = async (res, visitorId, searchParams) => {
 
 const VISITOR_PASS_PATH = /^\/api\/visitor-passes\/([^/]+)$/;
 
+// Intercom directory: company listings on the entry callbox. Entries are
+// { key?, company, contacts: [{ name?, email }] }; contacts resolve to UniFi
+// users by email. `mode: "replace"` also removes listings this server created
+// earlier that are missing from `entries` — never hand-made ones.
+const handleIntercomDirectorySync = async (res, body) => {
+  if (!Array.isArray(body.entries)) {
+    return sendJson(res, 400, { error: 'entries must be an array' });
+  }
+  const mode = body.mode || 'upsert';
+  if (mode !== 'upsert' && mode !== 'replace') {
+    return sendJson(res, 400, { error: 'mode must be "upsert" or "replace"' });
+  }
+  for (const [i, entry] of body.entries.entries()) {
+    if (!entry || typeof entry.company !== 'string' || !entry.company.trim()) {
+      return sendJson(res, 400, { error: `entries[${i}].company is required` });
+    }
+    if (!Array.isArray(entry.contacts)) {
+      return sendJson(res, 400, { error: `entries[${i}].contacts must be an array` });
+    }
+  }
+
+  const result = await syncIntercomDirectory({ entries: body.entries, mode });
+  // 200 even with per-entry failures: the caller reads `failed` and follows up
+  // on just those, the same way /api/members reports partial outcomes.
+  return sendJson(res, 200, result);
+};
+
+const handleIntercomDirectoryGet = async (res) => {
+  return sendJson(res, 200, await getIntercomDirectory());
+};
+
 // Costco Same-Day automation routes, mounted on this server so everything
 // shares one port (ngrok exposes a single tunnel). The express app does its
 // own auth (COSTCO_AUTOMATION_API_KEY, falling back to CAMERA_API_KEY) and
@@ -309,6 +341,14 @@ const server = http.createServer(async (req, res) => {
       return await handleListVisitorPasses(res, url.searchParams);
     }
 
+    if (req.method === 'POST' && url.pathname === '/api/intercom/directory/sync') {
+      return await handleIntercomDirectorySync(res, await readJsonBody(req));
+    }
+
+    if (req.method === 'GET' && url.pathname === '/api/intercom/directory') {
+      return await handleIntercomDirectoryGet(res);
+    }
+
     const visitorPassMatch = url.pathname.match(VISITOR_PASS_PATH);
     if (visitorPassMatch) {
       const visitorId = decodeURIComponent(visitorPassMatch[1]);
@@ -350,6 +390,8 @@ server.listen(PORT, () => {
   console.log(`  GET    /api/visitor-passes`);
   console.log(`  GET    /api/visitor-passes/:id`);
   console.log(`  DELETE /api/visitor-passes/:id     (?force=true to hard-delete)`);
+  console.log(`  GET  /api/intercom/directory`);
+  console.log(`  POST /api/intercom/directory/sync { entries: [{ key?, company, contacts: [{ name?, email }] }], mode? }`);
   console.log(`  GET  /api/costco/session`);
   console.log(`  POST /api/costco/orders/sync   { max_orders? }`);
   console.log(`  POST /api/costco/search        { query, limit? }`);
