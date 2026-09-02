@@ -250,7 +250,9 @@ async function runMock() {
     assert(ghost && ghost.unresolvedContacts.length === 2, 'entry with no active receivers fails with details');
     assert(ghost.unresolvedContacts.some((c) => c.reason === 'unifi_account_inactive'), 'inactive account reason surfaced');
     assert(r1.ok === false, 'partial failure sets ok=false');
-    assert(r1.unmanaged.length === 1 && r1.unmanaged[0].name === 'Building Admins', 'Building Admins stays unmanaged');
+    assert(r1.unmanaged.length === 1 && r1.unmanaged[0].roomId === 'room-admins', 'Building Admins stays unmanaged');
+    assert(r1.unmanaged[0].name === '* Building Admins', 'Building Admins is renamed so it sorts first');
+    assert(rooms.get('room-admins').name === '* Building Admins', 'pin is written to the live room');
 
     // Idempotent re-run.
     const r2 = await intercom.syncIntercomDirectory({

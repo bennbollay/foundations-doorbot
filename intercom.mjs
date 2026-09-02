@@ -311,6 +311,36 @@ function cleanRoomName(name) {
   return String(name || '').replace(/\s+/g, ' ').trim().slice(0, MAX_ROOM_NAME_LENGTH);
 }
 
+/**
+ * The intercom directory is alphabetical by room name. A leading "*"
+ * sorts before every letter (UniFi Access trims a leading space, so
+ * that trick does not stick). We never adopt or delete this room —
+ * we only rename the existing unmanaged entry to keep it pinned.
+ */
+const BUILDING_ADMINS_PINNED_NAME = '* Building Admins';
+const BUILDING_ADMINS_NAME_RE = /^\s*\*?\s*building\s+admins\s*$/i;
+
+function isBuildingAdminsName(name) {
+  return BUILDING_ADMINS_NAME_RE.test(String(name || ''));
+}
+
+async function pinBuildingAdminsToTop(callerId, rooms) {
+  const room = (rooms || []).find((r) => isBuildingAdminsName(r.name));
+  if (!room?.id) return rooms;
+  if (room.name === BUILDING_ADMINS_PINNED_NAME) return rooms;
+  try {
+    // Bypass cleanRoomName — a leading "*" is the whole point.
+    await accessRequest(`/callers/${callerId}/rooms/${room.id}`, {
+      method: 'POST',
+      body: { name: BUILDING_ADMINS_PINNED_NAME },
+    });
+    room.name = BUILDING_ADMINS_PINNED_NAME;
+  } catch (e) {
+    console.log(`[intercom] could not pin Building Admins to the top: ${e.message}`);
+  }
+  return rooms;
+}
+
 export async function createRoom(callerId, { name, receiverIds }) {
   const body = {
     disable_directory: false,
@@ -510,6 +540,9 @@ async function syncIntercomDirectoryUnlocked({ entries, mode = 'upsert', callerI
   }
 
   const removedIds = new Set(removed.map((r) => r.roomId));
+  // Pin after the managed-room work so we never adopt or delete this
+  // hand-made entry — we only rename it so it sorts first on the callbox.
+  await pinBuildingAdminsToTop(resolvedCallerId, directory.rooms);
   const unmanaged = directory.rooms
     .filter((r) => !managed[r.id] && !removedIds.has(r.id))
     .map((r) => ({ roomId: r.id, name: r.name }));
